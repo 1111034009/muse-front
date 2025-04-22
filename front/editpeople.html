@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../back/CSS/back.css">
+    <link rel="stylesheet" href="../back/CSS/Backstage.css">
+    <link rel="stylesheet" href="css/index.css" media="all">
+    <link rel="stylesheet" href="css/editpeople.css" media="all">
+    <script src="js/front_side.js"></script>
+    <title>編輯密碼</title>
+</head>
+
+<body>
+    <div class="sidebar-toggle" onclick="toggleSidebar()">☰</div>
+
+    <!-- 這個 div 用來插入側邊欄 -->
+    <div id="sidebar-container"></div>
+    <div class="main">
+        <h2 class="title">修改密碼</h2>
+        <div class="container">
+            <form id="password-form">
+                <div class="input-group">
+                    <label for="current-password">原始密碼</label>
+                    <input type="text" id="current-password" placeholder="zxcv1234" readonly>
+                </div>
+                <div class="input-group">
+                    <label for="new-password">更改密碼</label>
+                    <input type="password" id="new-password" placeholder="請輸入新密碼" required>
+                </div>
+                <div class="input-group">
+                    <label for="confirm-password">確認密碼</label>
+                    <input type="password" id="confirm-password" placeholder="請再次輸入新密碼" required>
+                </div>
+                <button type="submit" class="save-button">儲存</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

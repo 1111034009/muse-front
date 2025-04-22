@@ -1,0 +1,77 @@
+/* === 手機 (小於768px) === */
+@media (max-width: 767px) {
+    .main {
+      padding: 16px;
+    }
+  
+    .dashboard-cards {
+      flex-direction: column !important;
+      gap: 16px;
+    }
+  
+    .card {
+      width: 100% !important;
+    }
+  
+    .hot-tracks {
+      flex-direction: column !important;
+      gap: 12px;
+    }
+  
+    #sidebar-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100vh;
+     z-index: 1000;
+    }
+  
+    .sidebar-toggle {
+      display: block;
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      border: 1px solid #ccc;
+      padding: 8px;
+      z-index: 1100;
+    }
+  }
+  
+  /* === 平板 (768px - 1023px) === */
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .dashboard-cards {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+  
+    .card {
+      flex: 1 1 45%;
+    }
+  
+    .hot-tracks {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+  
+    .hot-track {
+      flex: 1 1 30%;
+    }
+  
+    .main {
+      padding: 24px;
+    }
+  }
+  
+  /* === 桌面 (1024px+) 補強 === */
+  @media (min-width: 1024px) {
+
+    #sidebar-container {
+      display: block !important;
+      position: static;
+      height: auto;
+      box-shadow: none;
+    }
+  }
+  

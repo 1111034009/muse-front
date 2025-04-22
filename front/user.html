@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>使用者畫面</title>
+    <link rel="stylesheet" href="../back/CSS/back.css">
+    <link rel="stylesheet" href="../back/CSS/Backstage.css">
+    <link rel="stylesheet" href="css/user.css" media="all">
+    <link rel="stylesheet" href="css/index.css" media="all">
+    <script src="js/front_side.js"></script>
+</head>
+<body>
+    <div class="setbody">
+        <div class="sidebar-toggle" onclick="toggleSidebar()">☰</div>
+
+        <!-- 功能列表 -->
+        <div id="sidebar-container"></div>
+        <!-- 內容區域 -->
+        <div class="main">
+        <main id="contents" class="contents">
+            <h2 class="title">使用者</h2>
+            <div class="left">
+                <div class="avatar"></div>
+                <div class="name">12</div>
+                <a href="Manage_permissions.html">查看權限</a>
+            </div>
+            <div class="right">
+                <a href="peopleedit.html" class="button">修改個人資料</a>
+                <a href="editpeople.html" class="button">修改密碼</a>
+                <a href="category.html" class="button">音樂偏好設置</a>
+                <a href="login.html" class="button logout">登出</a>
+            </div>
+        </main> 
+        </div>
+    </div>
+</body>
+
+</html>
