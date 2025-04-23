@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <title>登入用戶</title>
     <link rel="stylesheet" href="css/login.css" media="all">
-    
 </head>
 
 <body>
@@ -22,7 +21,7 @@
             </div>
         </div>
         <div class="logindown">
-            <button class="login-button login-login">登入</button>
+            <button class="login-button login-login" onclick="handleLogin()">登入</button>
             <a href="register.html"><button class="login-button login-register">註冊</button></a>
         </div>
 
@@ -32,6 +31,37 @@
         <p id="error-message" class="error-text"></p>
     </div>
 
+    <script>
+        // 模擬的帳號密碼資料
+        const validCredentials = {
+            username: "Abc",
+            password: "123456"
+        };
+
+        function handleLogin() {
+            const username = document.getElementById("username").value.trim();
+            const password = document.getElementById("password").value.trim();
+            const errorMessage = document.getElementById("error-message");
+
+            // 清空錯誤訊息
+            errorMessage.textContent = "";
+
+            // 驗證輸入
+            if (!username || !password) {
+                errorMessage.textContent = "請填寫帳號和密碼！";
+                return;
+            }
+
+            // 驗證帳號密碼
+            if (username === validCredentials.username && password === validCredentials.password) {
+                // 登入成功，跳轉到 choicepeople.html
+                window.location.href = "choicepeople.html";
+            } else {
+                // 登入失敗，顯示錯誤訊息
+                errorMessage.textContent = "帳號或密碼錯誤！";
+            }
+        }
+    </script>
 </body>
 
 </html>

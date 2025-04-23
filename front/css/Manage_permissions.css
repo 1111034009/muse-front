@@ -98,9 +98,8 @@ body {
 
 
 .modal input {
-    margin-top: 5px;
-    margin-bottom: 15px;
-    width: 95%;
+    margin: 5px 0;
+    width: 100%;
     padding: 8px;
     font-size: 16px;
 }
@@ -162,4 +161,8 @@ body {
     border-radius: 5px;
     cursor: pointer;
     font-weight: bold;
+}
+
+.modal-buttons {
+    display: flex;
 }
