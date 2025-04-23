@@ -43,8 +43,14 @@ main {
     display: flex;
     justify-content: space-between; 
     align-items: center;
+    cursor: pointer; 
 }
 
+.song-item:hover {
+    background-color: #f0f0f0; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    border-radius: 20px;
+}
 .song-info {
     display: flex;
     align-items: center;
