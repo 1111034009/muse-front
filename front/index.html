@@ -11,31 +11,93 @@
     <link rel="stylesheet" href="css/index.css" media="all">
     <link rel="stylesheet" href="css/top.css" media="all">
     <script src="js/front_side.js"></script>
+    <style>
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+        }
 
+        .modal-content {
+            position: relative;
+            font-size: 18px;
+            background-color: #fff;
+            padding: 10px 30px;
+            border-radius: 8px;
+            text-align: center;
+            width: 300px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-content label {
+            color: #222;
+            padding: 5px;
+        }
+
+        .modal-content h3 {
+            color: #222;
+        }
+
+        .modal-content form {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .modal-content input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+
+        .close-button {
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            background: none;
+            border: none;
+            font-size: 25px;
+            font-weight: bold;
+            color: #505050;
+            cursor: pointer;
+        }
+
+         .add_button {
+            margin: 10px 5px;
+            padding: 5px 15px;
+            border: none;
+            background-color: #cecece;
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            width: 95%;
+        }
+
+        .add_button:hover {
+            background-color: #adadad;
+        }
+
+
+    </style>
 </head>
 
 <body>
     <div class="setbody">
         <div class="sidebar-toggle" onclick="toggleSidebar()">☰</div>
-
-        <!-- 這個 div 用來插入側邊欄 -->
         <div id="sidebar-container"></div>
+
         <div class="main">
-            <!-- <div class="title">
-                <div class="left"></div>
-                <h2 class="titleh2">MUSE</h2><a href="user.html" class="title-user">
-                    <span class="icon-holder">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-                            class="bi bi-person-fill" viewBox="0 0 16 16">
-                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
-                        </svg>
-                    </span>
-                </a>
-            </div> -->
             <div class="title">
                 <h2 class="titleh2">MUSE</h2>
             </div>
-            <!-- 內容區域 -->
+
             <main id="contents" style="width:auto;">
                 <div class="top">
                     <div class="slider">
@@ -45,16 +107,13 @@
                     </div>
                 </div>
 
-                <!-- 搜尋欄位 -->
                 <div class="search-bar">
                     <input type="text" placeholder="搜尋" id="searchInput">
                     <button onclick="window.location.href='ranking.html'">
                         <img src="img/Search 02.png" alt="搜尋">
                     </button>
-
                 </div>
 
-                <!-- 歌曲區域 -->
                 <div class="song">
                     <div class="hot">
                         <h2>今日熱門</h2>
@@ -83,7 +142,6 @@
                                     </div>
                                 </a>
                             </li>
-
                             <li>
                                 <a href="music.html">
                                     <div class="songs">
@@ -144,6 +202,63 @@
             </main>
         </div>
     </div>
+
+    <!-- 彈窗區塊 -->
+    <div id="playlistModal" class="modal">
+        <div class="modal-content">
+            <button class="close-button" onclick="closePlaylistModal()">×</button>
+            <h3>將音樂儲存至...</h3>
+            <form id="playlistForm">
+                <!-- 動態加入歌單清單 -->
+            </form>
+            <button onclick="addToSelectedPlaylists()" class="add_button">加入</button>
+        </div>
+    </div>
+
+    <script>
+        const playlistData = [
+            { name: "喜歡的歌" },
+            { name: "運動撥放清單" },
+            { name: "讀書歌單" },
+            { name: "睡前聽" }
+        ];
+
+        function openPlaylistModal() {
+            const form = document.getElementById("playlistForm");
+            form.innerHTML = "";
+            playlistData.forEach(playlist => {
+                const label = document.createElement("label");
+                label.innerHTML = `
+                    <input type="checkbox" name="playlist" value="${playlist.name}">${playlist.name}<br>
+                `;
+                form.appendChild(label);
+            });
+            document.getElementById("playlistModal").style.display = "flex";
+        }
+
+        function closePlaylistModal() {
+            document.getElementById("playlistModal").style.display = "none";
+        }
+
+        function addToSelectedPlaylists() {
+            const selected = [...document.querySelectorAll('input[name="playlist"]:checked')].map(cb => cb.value);
+            if (selected.length === 0) {
+                alert("請至少選一個歌單！");
+                return;
+            }
+            console.log("已加入以下歌單：", selected);
+            closePlaylistModal();
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelectorAll(".songtags").forEach(button => {
+                button.addEventListener("click", e => {
+                    e.preventDefault();
+                    openPlaylistModal();
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
