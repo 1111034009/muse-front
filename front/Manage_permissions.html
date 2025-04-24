@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
-
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../back/CSS/back.css">
@@ -20,21 +19,21 @@
         <h2 class="title">權限</h2>
         <button class="save-btn">新增</button>
         <div class="container" id="userList">
-            <div class="user-item" data-role="一般">
+            <div class="user-item" data-role="一般" data-username="大大">
                 <span>大大(一般)</span>
                 <div class="user-controls">
                     <button class="edit">編輯</button>
                     <button class="del">刪除</button>
                 </div>
             </div>
-            <div class="user-item" data-role="青少年">
+            <div class="user-item" data-role="青少年" data-username="黃黃">
                 <span>黃黃(青少年)</span>
                 <div class="user-controls">
                     <button class="edit">編輯</button>
                     <button class="del">刪除</button>
                 </div>
             </div>
-            <div class="user-item" data-role="一般">
+            <div class="user-item" data-role="一般" data-username="石">
                 <span>石(一般)</span>
                 <div class="user-controls">
                     <button class="edit">編輯</button>
@@ -43,17 +42,14 @@
             </div>
         </div>
     </div>
-    <!-- 新增彈窗區塊 -->
+
+    <!-- 新增彈窗 -->
     <div class="modal" id="newuserModal">
         <div class="modal-content">
             <button class="close-button" onclick="closeModal('newuserModal')">&times;</button>
             <h3>使用者新增</h3>
-            <label>帳號:
-                <input type="text" id="new-username">
-            </label>
-            <label>密碼:
-                <input type="password" id="new-password">
-            </label>
+            <label>帳號: <input type="text" id="new-username"></label>
+            <label>密碼: <input type="password" id="new-password"></label>
             <label>權限
                 <select id="new-role">
                     <option value="一般">一般</option>
@@ -64,18 +60,15 @@
                 <button onclick="confirmAdd()" class="modelbyes">確認</button>
                 <button onclick="closeModal('newuserModal')" class="modelbno">取消</button>
             </div>
-
         </div>
     </div>
 
-    <!-- 編輯彈窗區塊 -->
+    <!-- 編輯彈窗 -->
     <div class="modal" id="userModal">
         <div class="modal-content">
             <button class="close-button" onclick="closeModal('userModal')">&times;</button>
             <h3>使用者設定</h3>
-            <label>帳號:
-                <input type="text" id="edit-username">
-            </label>
+            <label>帳號: <input type="text" id="edit-username" readonly></label>
             <label>權限
                 <select id="edit-role">
                     <option value="一般">一般</option>
@@ -89,103 +82,91 @@
         </div>
     </div>
 
-    </div>
-
     <script>
-     function openModal(id, userName = "", userRole = "") {
-    const modal = document.getElementById(id);
-
-    if (id === "userModal") {
-        // 填入使用者資訊
-        document.getElementById("edit-username").value = userName;
-        document.getElementById("edit-role").value = userRole;
-    }
-
-    modal.style.display = "flex";
-}
-
-function closeModal(id) {
-    document.getElementById(id).style.display = "none";
-}
-
-// 綁定按鈕事件
-document.querySelector('.save-btn').addEventListener('click', () => openModal('newuserModal'));
-
-document.querySelectorAll('.edit').forEach((button, index) => {
-    button.addEventListener('click', () => {
-        // 抓取使用者資訊
-        const userItem = button.closest('.user-item');
-        const userName = userItem.querySelector('span').textContent.trim();
-        const userRole = userItem.getAttribute('data-role') || "一般"; // 假設角色資訊存儲在 data-role 屬性中
-
-        // 打開編輯彈窗並填入資訊
-        openModal('userModal', userName, userRole);
-    });
-});
-
-document.querySelectorAll('.del').forEach(button => {
-    button.addEventListener('click', (e) => {
-        e.target.closest('.user-item').remove();
-    });
-});
-
-function confirmAdd() {
-    const username = document.getElementById("new-username").value.trim();
-    const password = document.getElementById("new-password").value.trim();
-    const role = document.getElementById("new-role").value;
-
-    if (!username || !password) {
-        alert("請填寫帳號和密碼！");
-        return;
-    }
-
-    // 動態新增使用者到 userList
-    const userList = document.getElementById("userList");
-    const newUserItem = document.createElement("div");
-    newUserItem.className = "user-item";
-    newUserItem.setAttribute("data-role", role);
-    newUserItem.innerHTML = `
-        <span>${username}(${role})</span>
-        <div class="user-controls">
-            <button class="edit">編輯</button>
-            <button class="del">刪除</button>
-        </div>
-    `;
-
-    // 綁定編輯和刪除按鈕事件
-    newUserItem.querySelector(".edit").addEventListener("click", () => {
-        openModal('userModal', username, role);
-    });
-
-    newUserItem.querySelector(".del").addEventListener("click", (e) => {
-        e.target.closest('.user-item').remove();
-    });
-
-    userList.appendChild(newUserItem);
-
-    // 清空輸入欄位並關閉彈窗
-    document.getElementById("new-username").value = "";
-    document.getElementById("new-password").value = "";
-    document.getElementById("new-role").value = "一般";
-    closeModal('newuserModal');
-}
-
-function confirmEdit() {
-    const username = document.getElementById("edit-username").value;
-    const role = document.getElementById("edit-role").value;
-
-    // 更新使用者資訊
-    const userItems = document.querySelectorAll(".user-item");
-    userItems.forEach(item => {
-        const span = item.querySelector("span");
-        if (span.textContent.includes(username)) {
-            span.textContent = `${username}(${role})`;
-            item.setAttribute("data-role", role);
+        function openModal(id, userName = "", userRole = "") {
+            const modal = document.getElementById(id);
+            if (id === "userModal") {
+                document.getElementById("edit-username").value = userName;
+                document.getElementById("edit-role").value = userRole;
+            }
+            modal.style.display = "flex";
         }
-    });
-    closeModal('userModal');
-}
 
+        function closeModal(id) {
+            document.getElementById(id).style.display = "none";
+        }
+
+        document.querySelector('.save-btn').addEventListener('click', () => openModal('newuserModal'));
+
+        document.querySelectorAll('.edit').forEach(button => {
+            button.addEventListener('click', () => {
+                const userItem = button.closest('.user-item');
+                const userName = userItem.getAttribute('data-username');
+                const userRole = userItem.getAttribute('data-role');
+                openModal('userModal', userName, userRole);
+            });
+        });
+
+        document.querySelectorAll('.del').forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.target.closest('.user-item').remove();
+            });
+        });
+
+        function confirmAdd() {
+            const username = document.getElementById("new-username").value.trim();
+            const password = document.getElementById("new-password").value.trim();
+            const role = document.getElementById("new-role").value;
+
+            if (!username || !password) {
+                alert("請填寫帳號和密碼！");
+                return;
+            }
+
+            const userList = document.getElementById("userList");
+            const newUserItem = document.createElement("div");
+            newUserItem.className = "user-item";
+            newUserItem.setAttribute("data-role", role);
+            newUserItem.setAttribute("data-username", username);
+            newUserItem.innerHTML = `
+                <span>${username}(${role})</span>
+                <div class="user-controls">
+                    <button class="edit">編輯</button>
+                    <button class="del">刪除</button>
+                </div>
+            `;
+
+            newUserItem.querySelector(".edit").addEventListener("click", () => {
+                openModal('userModal', username, role);
+            });
+
+            newUserItem.querySelector(".del").addEventListener("click", (e) => {
+                e.target.closest('.user-item').remove();
+            });
+
+            userList.appendChild(newUserItem);
+
+            document.getElementById("new-username").value = "";
+            document.getElementById("new-password").value = "";
+            document.getElementById("new-role").value = "一般";
+            closeModal('newuserModal');
+        }
+
+        function confirmEdit() {
+            const username = document.getElementById("edit-username").value;
+            const role = document.getElementById("edit-role").value;
+
+            const userItems = document.querySelectorAll(".user-item");
+            userItems.forEach(item => {
+                const storedUsername = item.getAttribute("data-username");
+                if (storedUsername === username) {
+                    item.querySelector("span").textContent = `${username}(${role})`;
+                    item.setAttribute("data-role", role);
+                }
+            });
+
+            closeModal('userModal');
+        }
     </script>
 </body>
 </html>
