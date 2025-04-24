@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../back/CSS/Backstage.css">
     <link rel="stylesheet" href="css/index.css" media="all">
     <link rel="stylesheet" href="css/Playlist.css" media="all">
+    <link rel="icon" href="/front/img/icon.png">
     <script src="js/front_side.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>歌單 </title>
@@ -34,9 +35,10 @@
                 <div class="modal-content">
                     <h3>新增歌單</h3>
                     <input type="text" id="playlistName" placeholder="輸入歌單名稱">
-                    <br>
-                    <button onclick="confirmAddPlaylist()">確認新增</button>
-                    <button onclick="closeModal()">取消</button>
+                    <div class="modal-buttons">
+                        <button onclick="confirmAddPlaylist()" class="play_add">新增</button>
+                        <button onclick="closeModal()" class="play_no">取消</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -82,7 +84,7 @@
                 alert("請輸入歌單名稱！");
                 return;
             }
-            playlistData.push({ name: playlistName, image: "img/1.webp" });
+            playlistData.push({ name: playlistName, image: "img/playlist.png" });
             closeModal();
             loadPlaylists();
         }

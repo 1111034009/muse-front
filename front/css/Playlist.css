@@ -8,6 +8,12 @@ body {
     font-family: Arial, sans-serif;
 }
 
+h3 {
+    color: #2c2c3e;
+    margin: 0;
+    font-size: 21px;
+}
+
 .container {
     width: 100%;
     display: flex;
@@ -60,8 +66,9 @@ body {
     margin-top: 5px;
     font-weight: bold;
 }
-a{
-    text-decoration:none;
+
+a {
+    text-decoration: none;
     color: rgb(54, 52, 52);
 }
 
@@ -94,8 +101,10 @@ a{
     cursor: pointer;
     position: fixed;
     top: 15px;
-    right: 20px; /* 調整位置到右上角 */
-    z-index: 200; /* 確保按鈕在標題上方 */
+    right: 20px;
+    /* 調整位置到右上角 */
+    z-index: 200;
+    /* 確保按鈕在標題上方 */
 }
 
 /* 模態框樣式 */
@@ -115,32 +124,71 @@ a{
 
 .modal-content {
     background: white;
-    padding: 20px;
+    padding: 25px ;
     border-radius: 10px;
-    width: 300px;
+    width: 40%;
     text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.modal-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
 }
 
 .modal input {
-    width: 80%;
-    padding: 8px;
-    margin-top: 10px;
+    font-size: 16px;
+    width: 90%;
+    padding: 10px 8px;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
 }
 
-.modal button {
-    margin-top: 10px;
+.play_add {
+    width: 40%;
+    /* margin: 5px; */
+    font-size: 16px;
+    font-weight: bold;
     padding: 8px 15px;
     border: none;
-    border-radius: 5px;
-    background-color: red;
+    border-radius: 15px;
+    background-color: #48489b;
+    border: 1px solid #55453b;
     color: white;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
-.modal button:hover {
+.play_add:hover {
+    border: none;
+    background-color: #35356d;
+}
+
+.play_no {
+    width: 40%;
+    font-size: 16px;
+    font-weight: bold;
+    /* margin: 5px; */
+    padding: 8px 15px;
+    border: 1px solid #55453b;
+    border-radius: 15px;
+    color: rgb(46, 46, 46);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.play_no:hover {
     background-color: darkred;
+    color: white;
+    border: none;
 }
