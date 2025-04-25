@@ -8,6 +8,7 @@
 
 body {
     background: #CEDEF6;
+    /* background-image: url("../img/background.jpg"); */
     height: 100vh;
     display: flex;
     justify-content: center;
