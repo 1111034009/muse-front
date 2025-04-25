@@ -45,32 +45,33 @@
     </div>
 
     <script>
-        const playlistData = [
-            { name: "喜歡的歌", image: "img/1.webp" },
-            { name: "運動撥放清單", image: "img/APT..jpg" },
-            { name: "讀書歌單", image: "img/Strategy.jpg" },
-            { name: "睡前聽", image: "img/ReallyLikeYou.jpg" },
-        ];
+const playlistData = [
+    { id: 1, name: "喜歡的歌", image: "img/1.webp" },
+    { id: 2, name: "運動撥放清單", image: "img/APT..jpg" },
+    { id: 3, name: "讀書歌單", image: "img/Strategy.jpg" },
+    { id: 4, name: "睡前聽", image: "img/ReallyLikeYou.jpg" },
+];
 
-        function loadPlaylists() {
-            const container = document.getElementById("playlistContainer");
-            container.innerHTML = "";
+function loadPlaylists() {
+    const container = document.getElementById("playlistContainer");
+    container.innerHTML = "";
 
-            playlistData.forEach(playlist => {
-                const wrapper = document.createElement("div");
-                wrapper.className = "playlist-wrapper";
+    playlistData.forEach(playlist => {
+        const wrapper = document.createElement("div");
+        wrapper.className = "playlist-wrapper";
 
-                wrapper.innerHTML = `
-            <div class="playlist">
+        wrapper.innerHTML = `
+            <div class="playlist" onclick="location.href='Sub-playlist.html?playlistId=${playlist.id}'">
                 <img src="${playlist.image}" alt="${playlist.name}">
                 <div class="overlay">查看歌曲</div>
             </div>
             <div class="playlist-title">${playlist.name}</div>
         `;
 
-                container.appendChild(wrapper);
-            });
-        }
+        container.appendChild(wrapper);
+    });
+}
+
 
 
         // 打開彈窗
