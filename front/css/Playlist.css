@@ -22,50 +22,100 @@ h3 {
     gap: 20px;
     margin: 7% auto;
 }
+#playlistContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start; 
+    gap: 24px; 
+    padding: 20px;
+}
 
-/* 播放列表樣式 */
+
+.playlist-wrapper {
+    width: 180px; 
+    text-align: center;
+    flex-shrink: 0;
+}
+
 .playlist {
     position: relative;
-    width: 200px;
-    text-align: center;
+    width: 100%;
+    padding-top: 100%; 
+    border-radius: 10px;
     cursor: pointer;
+    overflow: visible;
+    margin: 0 auto;
+}
+
+
+.playlist img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+    z-index: 3;
+    box-shadow: 0px 2px 6px rgba(0,0,0,0.25);
 }
 
 .playlist::before,
 .playlist::after {
-    content: "";
+    content: '';
     position: absolute;
-    width: 100%;
-    height: 100%;
-    background: rgba(200, 200, 200, 0.6);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    height: 90%;
     border-radius: 10px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    background-color: #000;
+    pointer-events: none;
 }
 
 .playlist::before {
-    top: -5px;
-    left: 5px;
-    z-index: -2;
-}
-
-.playlist::after {
-    top: -10px;
-    left: 10px;
-    z-index: -1;
-}
-
-.playlist img {
-    width: 100%;
-    border-radius: 10px;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-    position: relative;
+    top: -6px;
+    opacity: 0.15;
     z-index: 1;
 }
 
-.playlist p {
-    margin-top: 5px;
-    font-weight: bold;
+.playlist::after {
+    top: -12px;
+    width: 80%;
+    height: 80%;
+    opacity: 0.07;
+    z-index: 0;
 }
+
+.playlist .overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    z-index: 4;
+    border-radius: 10px;
+    transition: opacity 0.3s ease;
+}
+
+.playlist:hover .overlay {
+    opacity: 1;
+}
+
+.playlist-title {
+    margin-top: 8px;
+    font-size: 19px;
+    font-weight: 600;
+    color: #222;
+    text-align: center;
+}
+
 
 a {
     text-decoration: none;
@@ -102,12 +152,9 @@ a {
     position: fixed;
     top: 15px;
     right: 20px;
-    /* 調整位置到右上角 */
     z-index: 200;
-    /* 確保按鈕在標題上方 */
 }
 
-/* 模態框樣式 */
 .modal {
     display: none;
     position: fixed;
