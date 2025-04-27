@@ -20,7 +20,6 @@ main {
     justify-content: center;      
     align-items: flex-start;
     flex-wrap: wrap;
-    margin-top: 45px;   
     max-width: 1200px;
     padding: 0 20px;
     box-sizing: border-box;
@@ -28,6 +27,7 @@ main {
 
 .rank {
     display: flex;
+    width: 100%;
     flex-direction: column;
     gap: 5px;
     justify-content: center;
