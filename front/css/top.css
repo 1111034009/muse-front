@@ -54,30 +54,32 @@
 
   .carousel-track a img.prev {
     transform: translate(-100%, -50%) scale(0.8);
-    opacity: 0.7;
+    opacity: 1;
     filter: brightness(70%);
     z-index: 3;
   }
 
   .carousel-track a img.next {
     transform: translate(0%, -50%) scale(0.8);
-    opacity: 0.7;
+    opacity: 1;
     filter: brightness(70%);
     z-index: 3;
+
   }
 
   .carousel-track a img.prev2 {
     transform: translate(-150%, -50%) scale(0.6);
-    opacity: 0.5;
+    opacity: 1;
     filter: brightness(50%);
     z-index: 2;
   }
 
   .carousel-track a img.next2 {
     transform: translate(50%, -50%) scale(0.6);
-    opacity: 0.5;
+    opacity: 1;
     filter: brightness(50%);
     z-index: 2;
+
   }
 
   /* 其他都藏起來 */
@@ -108,10 +110,11 @@
     background-color: #4f69b6;
   }
 
-  /* 炫炮 hover */
+
   .carousel-track a img.active:hover {
     transform: translate(-50%, -50%) scale(1.1);
   }
+
   .search-bar {
     display: flex;
     justify-content: center;
