@@ -6,8 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MB-歌曲管理</title>
   <link rel="stylesheet" href="CSS/back.css">
+  <link rel="stylesheet" href="CSS/Backstage.css">
   <link rel="stylesheet" href="CSS/backmusic.css">
-  <link rel="icon" href="/front/img/icon.png">
+  <link rel="stylesheet" href="../RWD.css">
+  <link rel="icon" href="../front/img/icon.png">
   <script src="js/side.js"></script>
 </head>
 
@@ -37,10 +39,10 @@
         <option value="country">鄉村</option>
         <option value="reggae">雷鬼</option>
         <option value="rnb">R&B</option>
-
       </select>
       <a href="Back_UploadMusic.html" class="upload">上傳音樂</a>
     </div>
+
     <div class="song-list">
       <div class="song-head">
         <span class="item-name">歌曲名稱</span>
@@ -51,54 +53,72 @@
         <span>操作</span>
       </div>
 
+      <div id="song-container"></div>
 
-      <div class="song-item">
-        <img src="img/SING.jpg">
-        <span class="item-name">歌曲名稱1</span>
-        <span class="item-limit">限制</span>
-        <span class="item-author">作者</span>
-        <span class="item-type">流行</span>
-        <a href="Back_EditMusic.html" class="btn-edit">編輯</a>
-        <button class="btn-delete">刪除</button>
-      </div>
-      <div class="song-item">
-        <img src="img/SING.jpg">
-        <span class="item-name">歌曲名稱2</span>
-        <span class="item-limit">一般</span>
-        <span class="item-author">作者</span>
-        <span class="item-type">電子</span>
-        <a href="Back_EditMusic.html" class="btn-edit">編輯</a>
-        <button class="btn-delete">刪除</button>
-      </div>
-      <div class="song-item">
-        <img src="img/SING.jpg">
-        <span class="item-name">歌曲名稱3</span>
-        <span class="item-limit">一般</span>
-        <span class="item-author">作者</span>
-        <span class="item-type">搖滾</span>
-        <a href="Back_EditMusic.html" class="btn-edit">編輯</a>
-        <button class="btn-delete">刪除</button>
-      </div>
-      <div class="song-item">
-        <img src="img/SING.jpg">
-        <span class="item-name">歌曲名稱4</span>
-        <span class="item-limit">限制</span>
-        <span class="item-author">作者</span>
-        <span class="item-type">雷鬼</span>
-        <a href="Back_EditMusic.html" class="btn-edit">編輯</a>
-        <button class="btn-delete">刪除</button>
-      </div>
-      <div class="song-item">
-        <img src="img/SING.jpg">
-        <span class="item-name">歌曲名稱5</span>
-        <span class="item-limit">一般</span>
-        <span class="item-author">作者</span>
-        <span class="item-type">電子</span>
-        <a href="Back_EditMusic.html" class="btn-edit">編輯</a>
-        <button class="btn-delete">刪除</button>
-      </div>
+      <!-- 分頁 -->
+      <div id="pagination"></div>
     </div>
   </div>
-</body>
 
+  <script>
+    // 模擬 35 首歌曲
+    const songs = Array.from({ length: 35 }, (_, i) => ({
+      name: `歌曲名稱${i + 1}`,
+      limit: i % 3 === 0 ? '限制' : '一般',
+      author: `作者${(i % 5) + 1}`,
+      type: ['流行', '搖滾', '電子', '爵士', '雷鬼'][i % 5],
+      img: 'img/SING.jpg'
+    }));
+
+    const songsPerPage = 10;
+    const songContainer = document.getElementById('song-container');
+    const pagination = document.getElementById('pagination');
+
+    function displaySongs(page) {
+      const start = (page - 1) * songsPerPage;
+      const end = start + songsPerPage;
+      const paginatedSongs = songs.slice(start, end);
+
+      songContainer.innerHTML = paginatedSongs.map(song => `
+        <div class="song-item">
+          <img src="${song.img}">
+          <span class="item-name">${song.name}</span>
+          <span class="item-limit">${song.limit}</span>
+          <span class="item-author">${song.author}</span>
+          <span class="item-type">${song.type}</span>
+          <a href="Back_EditMusic.html" class="btn-edit">編輯</a>
+          <button class="btn-delete">刪除</button>
+        </div>
+      `).join('');
+    }
+
+    function setupPagination(totalSongs) {
+      const totalPages = Math.ceil(totalSongs / songsPerPage);
+      pagination.innerHTML = '';
+
+      for (let i = 1; i <= totalPages; i++) {
+        const btn = document.createElement('button');
+        btn.textContent = i;
+        btn.onclick = () => {
+          displaySongs(i);
+          highlightPage(i);
+        };
+        pagination.appendChild(btn);
+      }
+
+      highlightPage(1);
+    }
+
+    function highlightPage(currentPage) {
+      const buttons = pagination.querySelectorAll('button');
+      buttons.forEach((btn, idx) => {
+        btn.classList.toggle('active', idx + 1 === currentPage);
+      });
+    }
+
+    // 初始化
+    displaySongs(1);
+    setupPagination(songs.length);
+  </script>
+</body>
 </html>

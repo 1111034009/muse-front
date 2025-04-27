@@ -5,9 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MB人員管理</title>
   <link rel="stylesheet" href="CSS/back.css">
+  <link rel="stylesheet" href="CSS/Backstage.css">
   <link rel="stylesheet" href="CSS/backpeople.css">
-  <link rel="icon" href="/front/img/icon.png">
-<script src="js/side.js"></script>
+  <link rel="stylesheet" href="../RWD.css">
+  <link rel="icon" href="../front/img/icon.png">
+  <script src="js/side.js"></script>
+
 </head>
 
 <body>
@@ -25,28 +28,77 @@
         </button>
       </div>
     </div>
+
+    <!-- 使用者清單 -->
     <div class="user-list">
       <div class="user-head">
         <span>使用者名</span>
         <span>郵件</span>
         <span>註冊日期</span>
-    </div>
-      <div class="user-item">
-          <span>用戶名稱1</span>
-          <span>abc1@mail.com</span>
-          <span>2024/09/25</span>
       </div>
-      <div class="user-item">
-        <span>用戶名稱2</span>
-        <span>abc2@mail.com</span>
-        <span>2024/09/26</span>
-      </div>
-      <div class="user-item">
-        <span>用戶名稱3</span>
-        <span>abc3@mail.com</span>
-        <span>2024/09/27</span>
-        
+      <div id="user-container"></div>
+
+      <!-- 分頁按鈕 -->
+      <div id="pagination" style="text-align: center; margin-top: 20px;"></div>
     </div>
   </div>
+
+  <!-- JS：模擬資料 + 分頁功能 -->
+  <script>
+    // 假資料 53 筆（可換成從後端來的資料）
+    const users = Array.from({ length: 53 }, (_, i) => ({
+      name: `用戶名稱${i + 1}`,
+      email: `abc${i + 1}@mail.com`,
+      date: `2024/09/${(25 + (i % 5)).toString().padStart(2, '0')}`
+    }));
+
+    const usersPerPage = 10;
+    const userContainer = document.getElementById('user-container');
+    const pagination = document.getElementById('pagination');
+
+    function displayUsers(page) {
+      const start = (page - 1) * usersPerPage;
+      const end = start + usersPerPage;
+      const paginatedUsers = users.slice(start, end);
+
+      userContainer.innerHTML = paginatedUsers.map(user => `
+        <div class="user-item">
+          <span>${user.name}</span>
+          <span>${user.email}</span>
+          <span>${user.date}</span>
+        </div>
+      `).join('');
+    }
+
+    function setupPagination(totalUsers) {
+      const totalPages = Math.ceil(totalUsers / usersPerPage);
+      pagination.innerHTML = '';
+
+      for (let i = 1; i <= totalPages; i++) {
+        const btn = document.createElement('button');
+        btn.textContent = i;
+        btn.style.margin = '0 5px';
+        btn.onclick = () => {
+          displayUsers(i);
+          highlightPage(i);
+        };
+        pagination.appendChild(btn);
+      }
+
+      highlightPage(1); // 初始頁碼高亮
+    }
+
+    function highlightPage(currentPage) {
+  const buttons = pagination.querySelectorAll('button');
+  buttons.forEach((btn, idx) => {
+    btn.classList.toggle('active', idx + 1 === currentPage);
+  });
+}
+
+
+    // 初始化畫面
+    displayUsers(1);
+    setupPagination(users.length);
+  </script>
 </body>
 </html>
