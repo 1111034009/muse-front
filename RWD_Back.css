@@ -194,13 +194,7 @@
     font-size: 14px;
   }
 
-  .user-list {
-    display: grid;
-    grid-template-columns: 1fr 2fr 2fr 1fr;  /* 四列 */
-    gap: 20px;
-    width: 100%;
-    box-sizing: border-box;
-  }
+
 
   .user-head,
   .user-item {

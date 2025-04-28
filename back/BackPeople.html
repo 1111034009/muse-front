@@ -32,9 +32,9 @@
     <!-- 使用者清單 -->
     <div class="user-list">
       <div class="user-head">
+        <span>ID</span>
         <span>使用者名</span>
         <span>郵件</span>
-        <span>註冊日期</span>
       </div>
       <div id="user-container"></div>
 
@@ -47,9 +47,9 @@
   <script>
     // 假資料 53 筆（可換成從後端來的資料）
     const users = Array.from({ length: 53 }, (_, i) => ({
+      id: (i + 1).toString().padStart(3, '0'),
       name: `用戶名稱${i + 1}`,
       email: `abc${i + 1}@mail.com`,
-      date: `2024/09/${(25 + (i % 5)).toString().padStart(2, '0')}`
     }));
 
     const usersPerPage = 10;
@@ -63,9 +63,9 @@
 
       userContainer.innerHTML = paginatedUsers.map(user => `
         <div class="user-item">
+          <span>${user.id}</span>         
           <span>${user.name}</span>
           <span>${user.email}</span>
-          <span>${user.date}</span>
         </div>
       `).join('');
     }

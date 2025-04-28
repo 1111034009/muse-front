@@ -128,7 +128,54 @@
     font-size: 18px;
     font-style: 14px;  }
 
+    .song-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
   
+    }
+  
+    .song-image img {
+      width: 70%;
+      max-width: 250px;
+      height: auto;
+      border-radius: 12px;
+    }
+  
+    .song-info h1 {
+      font-size: 22px;
+      margin: 8px 0;
+    }
+  
+    .song-info p {
+      margin: 4px 0;
+      font-size: 16px;  }
+  
+    .btn {
+      padding: 10px;
+      font-size: 18px;
+    }
+  
+    #seek-bar {
+      width: 100%;
+    }
+  
+    .volume-control {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: center;
+    }
+  
+    #volume {
+      width: 60%;
+    }
+  
+    .track-title {
+      font-size: 12px;
+      text-align: center;
+    }
 }
 
 /* 桌機版 */
