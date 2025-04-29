@@ -176,6 +176,56 @@
       font-size: 12px;
       text-align: center;
     }
+    @media (max-width: 767px) {
+
+      .song-list {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+    
+      .song-item {
+        width: 80%;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        padding: 12px;
+        display: flex;
+        flex-direction: column;
+      }
+    
+      .song-info {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 10px;
+      }
+      .song-text{
+        width: 170px;
+      }
+    
+      .song-info img {
+        width: 60px;
+        height: 60px;
+        border-radius: 6px;
+        object-fit: cover;
+      }
+    
+    
+      .add-button {
+        align-self: flex-end;
+        padding: 8px 14px;
+        font-size: 14px;
+        background-color: #e53935;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+    
+      .sidebar-toggle {
+        display: none;
+      }
+    }
 }
 
 /* 桌機版 */
