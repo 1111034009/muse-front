@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="css/top.css" media="all" />
     <link rel="stylesheet" href="css/ranking.css" media="all" />
     <link rel="stylesheet" href="css/model_pop.css" media="all">
-    <link rel="icon" href="/front/img/icon.png">
+    <link rel="icon" href="./img/icon.png">
     <script src="js/front_side.js"></script>
 </head>
 
@@ -31,9 +31,8 @@
                 <div class="rank">
                     <div class="song-item" onclick="goToMusic('ROCKSTAR')">
                         <div class="song-info">
-                            <img src="img/ROCKSTAR_lisa.jpg" alt="音樂">
                             <div class="song-text">
-                                <strong>ROCKSTAR</strong><br>LISA<br>流行
+                                <strong>ROCKSTAR</strong><br>LISA<br>
                             </div>
                         </div>
                         <button class="add-button" onclick="event.stopPropagation(); openPlaylistModal();">加入歌單</button>
@@ -41,9 +40,8 @@
 
                     <div class="song-item" onclick="goToMusic('Really Like You')">
                         <div class="song-info">
-                            <img src="img/ReallyLikeYou.jpg" alt="音樂">
                             <div class="song-text">
-                                <strong>Really Like You</strong><br>BABYMONSTER<br>流行
+                                <strong>Really Like You</strong><br>BABYMONSTER<br>
                             </div>
                         </div>
                         <button class="add-button" onclick="event.stopPropagation(); openPlaylistModal();">加入歌單</button>
@@ -51,9 +49,8 @@
 
                     <div class="song-item" onclick="goToMusic('Strategy')">
                         <div class="song-info">
-                            <img src="img/Strategy.jpg" alt="音樂">
                             <div class="song-text">
-                                <strong>Strategy</strong><br>TWICE<br>流行
+                                <strong>Strategy</strong><br>TWICE<br>
                             </div>
                         </div>
                         <button class="add-button" onclick="event.stopPropagation(); openPlaylistModal();">加入歌單</button>
@@ -61,9 +58,8 @@
 
                     <div class="song-item" onclick="goToMusic('APT.')">
                         <div class="song-info">
-                            <img src="img/APT..jpg" alt="音樂">
                             <div class="song-text">
-                                <strong>APT.</strong><br>Rosé（BLACKPINK）<br>K-pop
+                                <strong>APT.</strong><br>Rosé（BLACKPINK）<br>
                             </div>
                         </div>
                         <button class="add-button" onclick="event.stopPropagation(); openPlaylistModal();">加入歌單</button>
@@ -71,9 +67,8 @@
 
                     <div class="song-item" onclick="goToMusic('都怪我太貪心')">
                         <div class="song-info">
-                            <img src="img/都怪我太貪心.jpg" alt="音樂">
                             <div class="song-text">
-                                <strong>都怪我太貪心</strong><br>林三七<br>華語流行
+                                <strong>都怪我太貪心</strong><br>林三七<br>
                             </div>
                         </div>
                         <button class="add-button" onclick="event.stopPropagation(); openPlaylistModal();">加入歌單</button>
@@ -81,9 +76,8 @@
 
                     <div class="song-item" onclick="goToMusic('誰不是過著坎坷人生')">
                         <div class="song-info">
-                            <img src="img/誰不是過著坎坷人生.jpg" alt="音樂">
                             <div class="song-text">
-                                <strong>誰不是過著坎坷人生</strong><br>小燦<br>華語流行
+                                <strong>誰不是過著坎坷人生</strong><br>小燦<br>
                             </div>
                         </div>
                         <button class="add-button" onclick="event.stopPropagation(); openPlaylistModal();">加入歌單</button>
@@ -104,7 +98,6 @@
             <button onclick="addToSelectedPlaylists()" class="add_button">加入</button>
         </div>
     </div>
-
     <script>
         const playlistData = [
             { name: "喜歡的歌" },
@@ -112,24 +105,22 @@
             { name: "讀書歌單" },
             { name: "睡前聽" }
         ];
-
+    
         function openPlaylistModal() {
             const form = document.getElementById("playlistForm");
             form.innerHTML = "";
             playlistData.forEach(playlist => {
                 const label = document.createElement("label");
-                label.innerHTML = `
-                  <input type="checkbox" name="playlist" value="${playlist.name}">${playlist.name}<br>
-              `;
+                label.innerHTML = `<input type="checkbox" name="playlist" value="${playlist.name}">${playlist.name}<br>`;
                 form.appendChild(label);
             });
             document.getElementById("playlistModal").style.display = "flex";
         }
-
+    
         function closePlaylistModal() {
             document.getElementById("playlistModal").style.display = "none";
         }
-
+    
         function addToSelectedPlaylists() {
             const selected = [...document.querySelectorAll('input[name="playlist"]:checked')].map(cb => cb.value);
             if (selected.length === 0) {
@@ -139,21 +130,61 @@
             console.log("已加入以下歌單：", selected);
             closePlaylistModal();
         }
-
-        document.addEventListener("DOMContentLoaded", () => {
-            document.querySelectorAll(".songtags").forEach(button => {
-                button.addEventListener("click", e => {
-                    e.preventDefault();
-                    openPlaylistModal();
-                });
-            });
-        });
+    
         function goToMusic(songName) {
-            // 將歌曲名稱作為參數傳遞到 music.html
-            const encodedSongName = encodeURIComponent(songName); // 編碼以避免特殊字符問題
+            const encodedSongName = encodeURIComponent(songName);
             window.location.href = `music.html?song=${encodedSongName}`;
         }
+    
+        function searchMusic() {
+            const search = document.getElementById("searchInput").value;
+            const apiUrl = `http://localhost:8000/api/SearchMusic/getData?page=1&search=${encodeURIComponent(search)}`;
+    
+            fetch(apiUrl)
+                .then(response => {
+                    if (!response.ok) throw new Error("搜尋時發生錯誤");
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.status === "success") {
+                        displaySearchResults(data.data.records);
+                    } else {
+                        alert("搜尋結果為空");
+                    }
+                })
+                .catch(error => {
+                    console.error("搜尋錯誤:", error);
+                    alert("搜尋過程中發生錯誤，請稍後再試");
+                });
+        }
+    
+        function displaySearchResults(records) {
+            const rankContainer = document.querySelector(".rank");
+            if (!rankContainer) {
+                console.warn("找不到 .rank 元素");
+                return;
+            }
+    
+            rankContainer.innerHTML = ''; // 清空原本的排行內容
+    
+            records.forEach(record => {
+                const songItem = document.createElement("div");
+                songItem.className = "song-item";
+                songItem.setAttribute("onclick", `goToMusic('${record.Music_Name}')`);
+                songItem.innerHTML = `
+                    <div class="song-info">
+                        <div class="song-text">
+                            <strong>${record.Music_Name}</strong><br>${record.Artist}
+                        </div>
+                    </div>
+                    <button class="add-button" onclick="event.stopPropagation(); openPlaylistModal();">加入歌單</button>
+                `;
+                rankContainer.appendChild(songItem);
+            });
+        }
     </script>
+    
+
 </body>
 
 </html>

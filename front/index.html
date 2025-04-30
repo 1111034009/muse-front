@@ -91,7 +91,7 @@
 
                 <div class="search-bar">
                     <input type="text" placeholder="搜尋" id="searchInput">
-                    <button onclick="window.location.href='ranking.html'">
+                    <button onclick="searchMusic()">
                         <img src="img/Search 02.png" alt="搜尋">
                     </button>
                 </div>
@@ -101,7 +101,7 @@
                         <h2>今日熱門</h2>
                         <ul>
                             <li>
-                                <a href="music.html">
+                                <a  onclick="playmusic(8)">
                                     <div class="songs">
                                         <div class="songco">
                                             ROCKSTAR<br>
@@ -139,7 +139,7 @@
                         </ul>
                     </div>
 
-                    <div class="persontt">
+                    <!-- <div class="persontt">
                         <h2>個性建議</h2>
                         <ul>
                             <li>
@@ -179,7 +179,7 @@
                                 </a>
                             </li>
                         </ul>
-                    </div>
+                    </div> -->
                 </div>
             </main>
         </div>
@@ -198,49 +198,66 @@
     </div>
 
     <script>
-        const playlistData = [
-            { name: "喜歡的歌" },
-            { name: "運動撥放清單" },
-            { name: "讀書歌單" },
-            { name: "睡前聽" }
-        ];
-
-        function openPlaylistModal() {
-            const form = document.getElementById("playlistForm");
-            form.innerHTML = "";
-            playlistData.forEach(playlist => {
-                const label = document.createElement("label");
-                label.innerHTML = `
-                    <input type="checkbox" name="playlist" value="${playlist.name}">${playlist.name}<br>
-                `;
-                form.appendChild(label);
-            });
-            document.getElementById("playlistModal").style.display = "flex";
+        
+        function playmusic(musicId){
+            window.location.href = `music.html?musicId=${musicId}`;
         }
-
-        function closePlaylistModal() {
-            document.getElementById("playlistModal").style.display = "none";
-        }
-
-        function addToSelectedPlaylists() {
-            const selected = [...document.querySelectorAll('input[name="playlist"]:checked')].map(cb => cb.value);
-            if (selected.length === 0) {
-                alert("請至少選一個歌單！");
-                return;
-            }
-            console.log("已加入以下歌單：", selected);
-            closePlaylistModal();
-        }
-
-        document.addEventListener("DOMContentLoaded", () => {
-            document.querySelectorAll(".songtags").forEach(button => {
-                button.addEventListener("click", e => {
-                    e.preventDefault();
-                    openPlaylistModal();
-                });
-            });
-        });
+       
     </script>
+        <script>
+
+            // 搜尋音樂的函數
+            function searchMusic() {
+                const search = document.getElementById("searchInput").value;
+                const apiUrl = `http://localhost:8000/api/SearchMusic/getData?page=1&search=${search}`;
+    
+                // 發送 GET 請求到後端 API
+                fetch(apiUrl)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('搜尋時發生錯誤');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        // 當搜尋成功時，處理返回的資料
+                        if (data.status === "success") {
+                            displaySearchResults(data.data.records);  // 顯示搜尋結果
+                        } else {
+                            alert('搜尋結果為空');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('搜尋錯誤:', error);
+                        alert('搜尋過程中發生錯誤，請稍後再試');
+                    });
+            }
+    
+            // 顯示搜尋結果的函數
+            function displaySearchResults(records) {
+                const resultContainer = document.querySelector(".song .hot ul");  // 假設搜尋結果顯示區域在這裡
+    
+                // 清空現有的結果
+                resultContainer.innerHTML = '';
+                // 將每一條搜尋結果顯示到頁面上
+                records.forEach(record => {
+                    const listItem = document.createElement("li");
+                    listItem.innerHTML = `
+                <a href="music.html">
+                    <div class="songs">
+                        <div class="songco">
+                            ${record.Music_Name}<br>
+                            <span>${record.Artist} / ${record.Album}</span>
+                        </div>
+                        <button class="songtags">加入歌單</button>
+                    </div>
+                </a>
+            `;
+                    resultContainer.appendChild(listItem);  // 把新建立的 <li> 加到頁面中
+                });
+            }
+    
+        </script>
 </body>
 
 </html>
