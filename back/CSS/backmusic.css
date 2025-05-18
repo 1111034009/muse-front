@@ -1,16 +1,22 @@
-.main {
-  margin-left: 30px;
-  transition: margin-left 0.3s;
-}
+    body {
+      background-color: #1e1e2f;
+      color: #fff;
+      margin: 0;
+    }
 
-    /* 上傳按鈕 */
+    .main {
+      margin-left: 60px;
+      padding: 20px;
+      transition: margin-left 0.3s;
+    }
+
     .upload {
       text-decoration: none;
       background-color: #62AFF8;
       color: white;
       border: none;
       border-radius: 8px;
-      padding: 10px 20px;
+      padding: 10px ;
       font-size: 16px;
       font-weight: bold;
       cursor: pointer;
@@ -21,48 +27,47 @@
       background-color: #4a97df;
     }
 
-    /* 編輯＆刪除按鈕 */
     .btn-edit {
       text-decoration: none;
       background-color: #77BDFF;
       color: white;
       border: none;
       border-radius: 6px;
-      padding: 8px 14px;
-      font-size: 18px;
+      padding: 6px 15px;
+      font-size: 16px;
       font-weight: bold;
-      margin-left: 5px;
+      margin: 0 2px;
       cursor: pointer;
-      transition: background-color 0.2s ease;
     }
-    .btn-delete{
+
+    .btn-delete {
       text-decoration: none;
       background-color: #ff77c9;
       color: white;
       border: none;
       border-radius: 6px;
-      padding: 8px 14px;
-      font-size: 18px;
+      padding: 6px 15px;
+      font-size: 16px;
       font-weight: bold;
-      margin-left: 5px;
+      margin: 0 2px;
       cursor: pointer;
-      transition: background-color 0.2s ease; 
     }
+
     .btn-edit:hover {
       background-color: #5ea9f0;
     }
-    .btn-delete:hover{
+
+    .btn-delete:hover {
       background-color: #c95e9f;
     }
 
-    /* 搜尋欄 */
     .search-bar {
       display: flex;
       justify-content: center;
       align-items: center;
       margin: 30px auto;
       gap: 10px;
-      width: 80%;
+      width: 95%;
     }
 
     .search-container {
@@ -108,7 +113,6 @@
       transform: scale(1.1);
     }
 
-    /* 篩選 select 樣式 */
     .search-bar select {
       flex: 0 0 17.5%;
       background-color: #2E2E42;
@@ -121,65 +125,63 @@
       cursor: pointer;
     }
 
-    /* 保留 upload 按鈕樣式但設定寬度 */
     .search-bar button.upload {
       flex: 0 0 17.5%;
     }
 
-    /* 音樂清單樣式 */
-    .song-list {
-      margin: 40px auto;
+    .song-table {
+      border-collapse: separate;
+      border-spacing: 0;
       width: 90%;
+      margin: 20px auto;
+      overflow: hidden;
+      color: #fff;
     }
 
-    .song-head,
-    .song-item {
-      background-color: #303042;
-      color: white;
-      padding: 15px 20px;
-      display: flex;
-      gap: 20px;
-      font-weight: bold;
-      align-items: center;
+    .song-table th,
+    .song-table td {
+      padding: 12px;
+      text-align: center;
     }
 
-    .song-head {
+    .song-table th {
       background-color: #5F5F84;
-      border-radius: 12px 12px 0 0;
-      font-weight: bold;
     }
 
-    .song-item:last-child {
-      border-radius: 0 0 12px 12px;
+    .song-table .th-left {
+      border-top-left-radius: 12px;
     }
 
-    /* 標題、限制、作者、類型樣式 */
-    .song-head span,
-    .song-item span {
-      font-size: 18px;
-      flex: 1;
-      text-align: left;
+    .song-table .th-right {
+      border-top-right-radius: 12px;
     }
 
-    /* 修改圖片顯示 */
-    .song-item img {
+    .song-table img {
       width: 50px;
       height: 50px;
       object-fit: cover;
-      border-radius: 8px;  /* 圓角設置 */
+      border-radius: 4px;
     }
 
-    /* 改善欄位對齊：讓限制和作者對齊 */
-    .song-head .item-name,
-    .song-item .item-name {
-      flex: 2;  /* 歌曲名稱佔據較大空間 */
+    .song-table tr {
+      background-color: #303042;
     }
 
-    .song-head .item-limit,
-    .song-item .item-limit,
-    .song-head .item-author,
-    .song-item .item-author,
-    .song-head .item-type,
-    .song-item .item-type {
-      flex: 1; /* 其他欄位分配相等空間 */
+    #pagination {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    #pagination button {
+      margin: 0 5px;
+      padding: 6px 12px;
+      background-color: #444;
+      border: none;
+      color: #fff;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    #pagination button.active {
+      background-color: #77BDFF;
     }

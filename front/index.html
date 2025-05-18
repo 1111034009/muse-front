@@ -14,52 +14,6 @@
     <link rel="stylesheet" href="../RWD_Front.css"/>
     <link rel="icon" href="./img/icon.png">
     <script src="js/front_side.js"></script>
-    <style>
-@media (max-width: 767px) {
-
-  .carousel {
-    display: flex;
-    overflow-x: auto;
-    margin-top: 50px;
-  }
-
-  .carousel-track {
-    display: flex;
-    gap: 15px;
-  }
-
-  .carousel-track img {
-    width: 100%;
-    max-width: 200px;
-    height: auto;
-    border-radius: 8px;
-  }
-.search-bar{
-    margin-left: 80px;
-}
-
-  /* 歌單區域 */
-  .song {
-    padding-left: 30px;
-    display: flex;
-    flex-direction: column;
-  }
-.hot {
-    width: 100vw;
-}
-.persontt{
-    width: 100vw;
-}
-
-  .hot h2, .persontt h2 {
-    font-size: 22px;
-    margin-bottom: 10px;
-    text-align: center;
-  }
-
-
-}
-    </style>
 </head>
 
 <body>
@@ -88,27 +42,27 @@
                 <div class="dots"></div>
                 <script src="js/turnplay.js"></script>
 
-
+<!-- 
                 <div class="search-bar">
                     <input type="text" placeholder="搜尋" id="searchInput">
                     <button onclick="searchMusic()">
                         <img src="img/Search 02.png" alt="搜尋">
                     </button>
-                </div>
+                </div> -->
 
                 <div class="song">
                     <div class="hot">
                         <h2>今日熱門</h2>
                         <ul>
                             <li>
-                                <a  onclick="playmusic(8)">
+                                <a  onclick="playmusic(1)">
                                     <div class="songs">
                                         <div class="songco">
                                             ROCKSTAR<br>
                                             <span>LISA </span><br>
                                             <span>流行</span>
                                         </div>
-                                        <button class="songtags">加入歌單</button>
+                                            <button class="songtags">加入歌單</button>
                                     </div>
                                 </a>
                             </li>
@@ -139,7 +93,7 @@
                         </ul>
                     </div>
 
-                    <!-- <div class="persontt">
+                    <div class="persontt">
                         <h2>個性建議</h2>
                         <ul>
                             <li>
@@ -179,7 +133,7 @@
                                 </a>
                             </li>
                         </ul>
-                    </div> -->
+                    </div>
                 </div>
             </main>
         </div>

@@ -34,3 +34,24 @@ function validatePasswords() {
       return true; // 允許表單提交
   }
 }
+
+//記憶圖表
+document.addEventListener("DOMContentLoaded", () => {
+  const buttons = document.querySelectorAll('.chose1, .chose2');
+  const savedChoice = localStorage.getItem('activeChose');
+
+  if (savedChoice) {
+    buttons.forEach(b => b.classList.remove('active'));
+    document.querySelector(`.${savedChoice}`)?.classList.add('active');
+  } else {
+    document.querySelector('.chose1').classList.add('active');
+  }
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      localStorage.setItem('activeChose', btn.classList[0]);
+    });
+  });
+});

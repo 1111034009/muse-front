@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8" />
-  <title>MB-編輯音樂</title>
+  <title>MB 編輯音樂</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="CSS/back.css">
   <link rel="stylesheet" href="CSS/BackSet.css">
@@ -21,7 +21,7 @@
 
   <!-- 主內容 -->
   <div class="main">
-    <form class="music-edit-form" action="Backmusic.html" method="post">
+    <form class="music-edit-form" method="post">
       <div class="form-row">
         <div class="input-group">
           <label for="song-name">歌曲名稱</label>
@@ -44,9 +44,6 @@
             <option value="electro">電子</option>
             <option value="jazz">爵士</option>
             <option value="classical">古典</option>
-            <option value="blues">藍調</option>
-            <option value="country">鄉村</option>
-            <option value="reggae">雷鬼</option>
             <option value="rnb">R&B</option>
           </select>
         </div>
@@ -67,16 +64,9 @@
         </div>
       </div>
 
-      <div class="form-row">
-        <div class="input-group" style="width: 100%;">
-          <label for="cover-file">封面檔案</label>
-          <input type="file" id="cover-file" accept="image/*">
-        </div>
-      </div>
-
       <div class="form-row-btn">
-        <button class="btn">編輯音樂</button>
-        <button class="btn">返回歌曲</button>
+        <button class="btn" type="button" onclick="location.href='Backmusic.html'">編輯音樂</button>
+        <button class="btn" type="button" onclick="location.href='Backmusic.html'">返回歌曲</button>
       </div>
     </form>
   </div>

@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MB-歌曲管理</title>
+  <title>MB 歌曲管理</title>
   <link rel="stylesheet" href="CSS/back.css">
   <link rel="stylesheet" href="CSS/Backstage.css">
   <link rel="stylesheet" href="CSS/backmusic.css">
@@ -12,56 +11,53 @@
   <link rel="icon" href="../front/img/icon.png">
   <script src="js/side.js"></script>
 </head>
-
 <body>
   <div class="sidebar-toggle" onclick="toggleSidebar()">☰</div>
-  <!-- 側邊欄 -->
   <div id="sidebar-container"></div>
 
-  <!-- 主內容區 -->
   <div class="main">
     <div class="search-bar">
       <div class="search-container">
         <input type="text" placeholder="搜尋" id="search-input" />
-        <button id="search-button" class="search-btn">
+        <button id="search-button">
           <img src="img/Search 02.png" alt="搜尋" />
         </button>
       </div>
-      <select>
+      <select id="filter-select">
         <option value="">篩選</option>
-        <option value="pop">流行</option>
-        <option value="rock">搖滾</option>
-        <option value="hiphop">嘻哈</option>
-        <option value="electro">電子</option>
-        <option value="jazz">爵士</option>
-        <option value="classical">古典</option>
-        <option value="blues">藍調</option>
-        <option value="country">鄉村</option>
-        <option value="reggae">雷鬼</option>
-        <option value="rnb">R&B</option>
+        <option value="流行">流行</option>
+        <option value="搖滾">搖滾</option>
+        <option value="嘻哈">嘻哈</option>
+        <option value="電子">電子</option>
+        <option value="爵士">爵士</option>
+        <option value="古典">古典</option>
+        <option value="藍調">藍調</option>
+        <option value="鄉村">鄉村</option>
+        <option value="雷鬼">雷鬼</option>
+        <option value="R&B">R&B</option>
       </select>
       <a href="Back_UploadMusic.html" class="upload">上傳音樂</a>
     </div>
 
     <div class="song-list">
-      <div class="song-head">
-        <span class="item-name">歌曲名稱</span>
-        <div style="width: 50px;"></div>
-        <span class="item-limit">限制</span>
-        <span class="item-author">作者</span>
-        <span class="item-type">類型</span>
-        <span>操作</span>
-      </div>
-
-      <div id="song-container"></div>
-
-      <!-- 分頁 -->
+      <table class="song-table">
+        <thead>
+          <tr>
+            <th class="th-left">封面</th>
+            <th>歌曲名稱</th>
+            <th>限制</th>
+            <th>作者</th>
+            <th>類型</th>
+            <th class="th-right">操作</th>
+          </tr>
+        </thead>
+        <tbody id="song-container"></tbody>
+      </table>
       <div id="pagination"></div>
     </div>
   </div>
 
   <script>
-    // 模擬 35 首歌曲
     const songs = Array.from({ length: 35 }, (_, i) => ({
       name: `歌曲名稱${i + 1}`,
       limit: i % 3 === 0 ? '限制' : '一般',
@@ -70,6 +66,7 @@
       img: 'img/SING.jpg'
     }));
 
+    let filteredSongs = [...songs];
     const songsPerPage = 10;
     const songContainer = document.getElementById('song-container');
     const pagination = document.getElementById('pagination');
@@ -77,18 +74,20 @@
     function displaySongs(page) {
       const start = (page - 1) * songsPerPage;
       const end = start + songsPerPage;
-      const paginatedSongs = songs.slice(start, end);
+      const paginatedSongs = filteredSongs.slice(start, end);
 
       songContainer.innerHTML = paginatedSongs.map(song => `
-        <div class="song-item">
-          <img src="${song.img}">
-          <span class="item-name">${song.name}</span>
-          <span class="item-limit">${song.limit}</span>
-          <span class="item-author">${song.author}</span>
-          <span class="item-type">${song.type}</span>
-          <a href="Back_EditMusic.html" class="btn-edit">編輯</a>
-          <button class="btn-delete">刪除</button>
-        </div>
+        <tr>
+          <td><img src="${song.img}" alt="封面"></td>
+          <td>${song.name}</td>
+          <td>${song.limit}</td>
+          <td>${song.author}</td>
+          <td>${song.type}</td>
+          <td class="td-btn">
+            <a href="Back_EditMusic.html" class="btn-edit">編輯</a>
+            <button class="btn-delete">刪除</button>
+          </td>
+        </tr>
       `).join('');
     }
 
@@ -116,9 +115,26 @@
       });
     }
 
+    function applySearchAndFilter() {
+      const keyword = document.getElementById('search-input').value.trim().toLowerCase();
+      const selectedType = document.getElementById('filter-select').value;
+
+      filteredSongs = songs.filter(song => {
+        const matchesKeyword = song.name.toLowerCase().includes(keyword);
+        const matchesType = selectedType === '' || song.type === selectedType;
+        return matchesKeyword && matchesType;
+      });
+
+      displaySongs(1);
+      setupPagination(filteredSongs.length);
+    }
+
+    document.getElementById('search-button').addEventListener('click', applySearchAndFilter);
+    document.getElementById('filter-select').addEventListener('change', applySearchAndFilter);
+
     // 初始化
     displaySongs(1);
-    setupPagination(songs.length);
+    setupPagination(filteredSongs.length);
   </script>
 </body>
 </html>

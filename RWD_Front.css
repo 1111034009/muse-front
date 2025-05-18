@@ -1,20 +1,22 @@
 /* 手機 */
 @media (max-width: 767px) {
-  body{
+  body {
     height: 100vh;
   }
+
   .sidebar-toggle {
     display: none;
   }
-  
+
   .save-btn {
-    position: static;         
-    width: 100%;            
+    position: static;
+    width: 100%;
     margin-top: 40px;
     padding: 12px;
     font-size: 16px;
     border-radius: 8px;
   }
+
   .save-button {
     width: 60%;
     margin: 0 auto;
@@ -25,6 +27,7 @@
     border: none;
     border-radius: 8px;
   }
+
   .container {
     width: 100%;
     padding: 0 16px;
@@ -82,6 +85,7 @@
     justify-content: space-evenly;
     margin-top: 16px;
   }
+
   .title {
     font-size: 20px;
     text-align: center;
@@ -124,108 +128,128 @@
     box-sizing: border-box;
     width: 100%;
   }
+
   .input-group input::placeholder {
     font-size: 18px;
-    font-style: 14px;  }
+    font-style: 14px;
+  }
 
-    .song-container {
+  .song-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-left: 70px;
+    width: 80vw;
+
+  }
+
+  .song-image {
+    margin-bottom: 10px;
+  }
+
+  .song-image img {
+    width: 70%;
+    max-width: 250px;
+    height: auto;
+    border-radius: 12px;
+  }
+
+  .song-info {
+    text-align: center;
+  }
+
+  .song-info h1 {
+    font-size: 22px;
+    margin: 8px 0;
+  }
+
+  .song-info p {
+    margin: 8px 0;
+    font-size: 16px;
+  }
+
+  .flag-icon {
+    margin: 10px;
+  }
+
+  .btn {
+    padding: 10px;
+    font-size: 18px;
+  }
+
+  #seek-bar {
+    width: 100%;
+  }
+
+  .volume-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  #volume {
+    width: 60%;
+  }
+
+  .track-title {
+    font-size: 12px;
+    text-align: center;
+  }
+
+  @media (max-width: 767px) {
+
+    .song-list {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      text-align: center;
-  
+      gap: 16px;
     }
-  
-    .song-image img {
-      width: 70%;
-      max-width: 250px;
-      height: auto;
-      border-radius: 12px;
-    }
-  
-    .song-info h1 {
-      font-size: 22px;
-      margin: 8px 0;
-    }
-  
-    .song-info p {
-      margin: 4px 0;
-      font-size: 16px;  }
-  
-    .btn {
-      padding: 10px;
-      font-size: 18px;
-    }
-  
-    #seek-bar {
-      width: 100%;
-    }
-  
-    .volume-control {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      justify-content: center;
-    }
-  
-    #volume {
-      width: 60%;
-    }
-  
-    .track-title {
-      font-size: 12px;
-      text-align: center;
-    }
-    @media (max-width: 767px) {
 
-      .song-list {
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-      }
-    
-      .song-item {
-        width: 80%;
-        background-color: #f9f9f9;
-        border-radius: 10px;
-        padding: 12px;
-        display: flex;
-        flex-direction: column;
-      }
-    
-      .song-info {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        margin-bottom: 10px;
-      }
-      .song-text{
-        width: 170px;
-      }
-    
-      .song-info img {
-        width: 60px;
-        height: 60px;
-        border-radius: 6px;
-        object-fit: cover;
-      }
-    
-    
-      .add-button {
-        align-self: flex-end;
-        padding: 8px 14px;
-        font-size: 14px;
-        background-color: #e53935;
-        color: white;
-        border: none;
-        border-radius: 6px;
-        cursor: pointer;
-      }
-    
-      .sidebar-toggle {
-        display: none;
-      }
+    .song-item {
+      width: 80%;
+      background-color: #f9f9f9;
+      border-radius: 10px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
     }
+
+    .song-info {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 10px;
+      flex-direction: column;
+    }
+
+    .song-text {
+      width: 170px;
+    }
+
+    .song-info img {
+      width: 60px;
+      height: 60px;
+      border-radius: 6px;
+      object-fit: cover;
+    }
+
+
+    .add-button {
+      align-self: flex-end;
+      padding: 8px 14px;
+      font-size: 14px;
+      background-color: #e53935;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .sidebar-toggle {
+      display: none;
+    }
+  }
 }
 
 /* 桌機版 */
@@ -282,6 +306,7 @@
     position: static;
     height: auto;
   }
+
   .save-btn {
     font-size: 18px;
     padding: 10px 20px;
@@ -315,10 +340,9 @@
     justify-content: flex-end;
     gap: 10px;
   }
+
   .title {
     font-size: 28px;
   }
 
 }
-
-
