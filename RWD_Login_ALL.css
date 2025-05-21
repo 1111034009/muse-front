@@ -1,0 +1,25 @@
+ @media (max-width: 767px) {
+
+     /* login */
+     #loginBox {
+         width: 80vw;
+         padding: 15px;
+     }
+
+
+     .login-input input {
+         font-size: 14px;
+     }
+
+     .login-box .login-input {
+         gap: 5px;
+     }
+
+     .login-box .login-button button {
+         font-size: 14px;
+     }
+
+     .container {
+         transform: translate(-50%, -50%) scale(1);
+     }
+ }

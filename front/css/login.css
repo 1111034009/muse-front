@@ -1,124 +1,171 @@
-.error-text {
-    color: red;
-    font-size: 18px;
-    font-weight: bold;
-    margin-top: 10px;
-}
+ * {
+      box-sizing: border-box;
+    }
 
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(360deg, #005c8a, #003e5e, #00293d, #000000);
 
-body {
-    background: #CEDEF6;
-    /* background-image: url("../img/background.jpg"); */
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-}
+      font-weight: bolder;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+    }
 
-.login {
-    background: #36393F;
-    width: 630px;
-    height: 450px;
-    padding: 10px 40px;
-    border-radius: 12px;
-    text-align: center;
-    align-items: center;
-}
+    .container {
+      position: absolute;
+      display: flex;
+      gap: 12px;
+      transition: all 1.2s ease-in-out;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(1.8);
+      z-index: 10;
+    }
 
-.login h2 {
-    color: white;
-    margin-bottom: 20px;
-    font-size: 26px;
-}
+    .letter {
+      font-size: 80px;
+      color: #00BFFF;
+      opacity: 0;
+      text-shadow: 0 0 15px #00BFFF, 0 0 30px #00BFFF, 0 0 60px #00BFFF;
+      transition: opacity 0.4s ease;
+    }
 
-.logintop {
-    width: 100%;
-}
+    .letter.show {
+      opacity: 1;
+    }
 
-.inputtext {
-    justify-content: center;
-    display: flex;
-    align-items: center;
-    width: 100%;
-    margin-bottom: 15px;
-}
+    .container.move {
+      top: 20px;
+      left: 20px;
+      transform: translate(0, 0) scale(0.6);
+      opacity: 0.9;
+      filter: blur(0.5px);
+    }
 
-.inputtext label {
-    color: white;
-    font-size: 20px;
-    text-align: right;
-    margin-right: 10px;
-}
+    .login-box {
+      width: 500px;
+      padding: 20px 40px;
+      background: rgba(0, 0, 20, 0.3);
+      backdrop-filter: blur(12px);
+      border-radius: 16px;
+      box-shadow: 0 0 30px rgba(0, 191, 255, 0.3);
+      color: white;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 1s ease;
+      z-index: 5;
+      background-color: #0029;
+    }
 
-.inputtext input {
-    font-size: 18px;
-    width: 450px;
-    margin: 15px 5px;
-    height: 50px;
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #ffffff;
-    background-color: #22252C;
-    color: white;
-    text-align: center;
-    outline: none;
-}
+    .login-box.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-.inputtext input::placeholder {
-    color: white;
-    opacity: 0.9;
-}
+    .login-box h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 25px;
+      color: #00BFFF;
+    }
 
-.logindown {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin: 0 20px;
-}
+    .login-box .login-input {
+      display: flex;
+      gap: 15px;
+      font-size: 18px;
+      margin: 10px 0;
+    }
 
-.login-button {
-    width: 250px;
-    margin: 0 15px;
-    height: 52px;
-    border-radius: 8px;
-    border: none;
-    font-size: 20px;
-    color: white;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background 0.3s ease;
-}
+    .login-box .login-input input {
+      width: 85%;
+      padding: 12px;
+      margin: 5px 0;
+      border: none;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      font-size: 18px;
+    }
 
-.login-login {
-    background-color: #4b53ff;
-}
+    .login-box .login-input input::placeholder {
+      color: #aaa;
+    }
 
-.login-login:hover {
-    background-color: #3a42cc;
-}
+    .login-box .login-button {
+      display: flex;
+      padding: 5px;
+      gap: 10px;
+    }
 
-.login-register {
-    background-color: #2ba84a;
-}
+    .login-box .login-button button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      background-color: #5865F2;
+      border: none;
+      border-radius: 8px;
+      color: #ffffff;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .login-box .login-button .register {
+      background-color: rgb(43, 168, 126);
+    }
+    .login-box .login-button button:hover {
+      background-color: #00BFFF;
+    }
+    .login-box .login-button .register:hover {
+      background-color: rgb(23, 210, 148);
+    }
+    .login-error {
+      display: flex;
+      justify-content: space-between;
+    }
 
-.login-register:hover {
-    background-color: #23893a;
-}
+    .forgot {
+      font-size: 14px;
+      color: #aaa;
+      margin-top: 8px;
+      text-align: right;
+      cursor: pointer;
+      text-decoration: none;
+    }
 
+    .error {
+      border: 1px solid red !important;
+    }
 
-/* 忘記密碼樣式 */
-.forgot-password {
-    margin-top: 15px;
-}
+    .message {
+      font-size: 13px;
+      color: #ff8080;
+      margin-top: 10px;
+      text-align: center;
+    }
 
-.forgot-password a {
-    text-decoration: none;
-    color: #bbbbbb;
-    font-size: 18px;
-    transition: color 0.3s ease;
-}
+    @keyframes shake {
+      0% {
+        transform: translateX(0);
+      }
 
-.forgot-password a:hover {
-    color: white;
-}
+      25% {
+        transform: translateX(-5px);
+      }
+
+      50% {
+        transform: translateX(5px);
+      }
+
+      75% {
+        transform: translateX(-5px);
+      }
+
+      100% {
+        transform: translateX(0);
+      }
+    }

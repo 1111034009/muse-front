@@ -1,68 +1,83 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <title>登入用戶</title>
+    <title>MUSE Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/login.css" media="all">
+        <link rel="stylesheet" href="../RWD_Login_ALL.css" media="all">
     <link rel="icon" href="/front/img/icon.png">
 </head>
 
 <body>
-    <div class="login">
-        <h2>登入帳號</h2>
-        <div class="logintop">
-            <div class="inputtext">
-                <label for="username"><b>帳號</b></label>
-                <input type="text" id="username" placeholder="請輸入帳號">
-            </div>
-            <div class="inputtext">
-                <label for="password"><b>密碼</b></label>
-                <input type="password" id="password" placeholder="請輸入密碼">
-            </div>
-        </div>
-        <div class="logindown">
-            <button class="login-button login-login" onclick="handleLogin()">登入</button>
-            <a href="register.html"><button class="login-button login-register">註冊</button></a>
-        </div>
 
-        <div class="forgot-password">
-            <a href="forgot_password.html">忘記密碼？</a>
+    <!-- MUSE -->
+    <div class="container" id="muse">
+        <span class="letter">M</span>
+        <span class="letter">U</span>
+        <span class="letter">S</span>
+        <span class="letter">E</span>
+    </div>
+
+    <!-- 單一登入框 -->
+    <div class="login-box" id="loginBox">
+        <h2>登入帳號</h2>
+        <div class="login-input">
+            <p>帳號</p>
+            <input type="text" placeholder="請輸入帳號" id="loginUser">
         </div>
-        <p id="error-message" class="error-text"></p>
+        <div class="login-input">
+            <p>密碼</p>
+            <input type="password" placeholder="請輸入密碼" id="loginPass">
+        </div>
+        <div class="login-button">
+            <button onclick="location.href='register.html'" class="register">註冊</button>
+            <button onclick="Login()">登入</button>
+        </div>
+        <div class="login-error">
+            <div></div>
+            <div></div>
+            <div class="message" id="loginMessage"></div>
+            <a href="forgot_password.html" class="forgot">忘記密碼?</a>
+        </div>
     </div>
 
     <script>
-        // 模擬的帳號密碼資料
-        const validCredentials = {
-            username: "Abc",
-            password: "123456"
-        };
+        const letters = document.querySelectorAll('.letter');
+        const container = document.getElementById('muse');
+        const loginBox = document.getElementById('loginBox');
+        const message = document.getElementById('loginMessage');
+        // 字母
+        letters.forEach((letter, index) => {
+            setTimeout(() => letter.classList.add('show'), index * 200);
+        });
+        // 飄
+        setTimeout(() => container.classList.add('move'), 1400);
+        // 登入
+        setTimeout(() => loginBox.classList.add('show'), 2200);
+        function Login() {
+            const user = document.getElementById('loginUser');
+            const pass = document.getElementById('loginPass');
 
-        function handleLogin() {
-            const username = document.getElementById("username").value.trim();
-            const password = document.getElementById("password").value.trim();
-            const errorMessage = document.getElementById("error-message");
+            user.classList.remove('error');
+            pass.classList.remove('error');
+            message.textContent = '';
 
-            // 清空錯誤訊息
-            errorMessage.textContent = "";
-
-            // 驗證輸入
-            if (!username || !password) {
-                errorMessage.textContent = "請填寫帳號和密碼！";
+            if (!user.value.trim()) {
+                user.classList.add('error');
+                message.textContent = '請輸入帳號';
                 return;
             }
 
-            // 驗證帳號密碼
-            if (username === validCredentials.username && password === validCredentials.password) {
-                // 登入成功，跳轉到 choicepeople.html
-                window.location.href = "choicepeople.html";
-            } else {
-                // 登入失敗，顯示錯誤訊息
-                errorMessage.textContent = "帳號或密碼錯誤！";
+            if (!pass.value.trim()) {
+                pass.classList.add('error');
+                message.textContent = '請輸入密碼';
+                return;
             }
         }
     </script>
+
 </body>
 
 </html>
