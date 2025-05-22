@@ -6,7 +6,6 @@
       margin: 0;
       height: 100vh;
       background: linear-gradient(360deg, #005c8a, #003e5e, #00293d, #000000);
-
       font-weight: bolder;
       display: flex;
       justify-content: center;
@@ -52,13 +51,12 @@
       background: rgba(0, 0, 20, 0.3);
       backdrop-filter: blur(12px);
       border-radius: 16px;
-      box-shadow: 0 0 30px rgba(0, 191, 255, 0.3);
       color: white;
       opacity: 0;
       transform: translateY(30px);
       transition: all 1s ease;
       z-index: 5;
-      background-color: #0029;
+      background-color: #000022;
     }
 
     .login-box.show {
@@ -70,7 +68,7 @@
       text-align: center;
       margin-bottom: 20px;
       font-size: 25px;
-      color: #00BFFF;
+      color: #ffffff;
     }
 
     .login-box .login-input {

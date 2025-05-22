@@ -1,14 +1,19 @@
  @media (max-width: 767px) {
 
-     /* login */
-     #loginBox {
+     #loginBox,#registerBox {
          width: 80vw;
          padding: 15px;
+         margin-top: 70px;
      }
 
 
      .login-input input {
          font-size: 14px;
+     }
+
+     .input-group input {
+         font-size: 14px;
+
      }
 
      .login-box .login-input {
@@ -20,6 +25,10 @@
      }
 
      .container {
-         transform: translate(-50%, -50%) scale(1);
+         transform: translate(-50%, -50%);
+     }
+
+     #register .container {
+         transform: scale(0.6);
      }
  }

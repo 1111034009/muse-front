@@ -1,39 +1,136 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
+    <title>MUSE註冊</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/register.css" media="all">
+    <link rel="stylesheet" href="../RWD_Login_ALL.css" media="all">
     <link rel="icon" href="/front/img/icon.png">
-    <title>註冊頁面</title>
-
 </head>
 
-<body>
-    <div class="register-container">
-        <h2>註冊帳號</h2>
-        <form action="#" method="POST">
-            <div class="input-group">
-                <label for="username">帳號</label>
-                <input type="text" id="username" placeholder="請輸入帳號名稱">
-            </div>
-            <div class="input-group">
-                <label for="email">郵件</label>
-                <input type="email" id="email" placeholder="請輸入E-mail">
-            </div>
-            <div class="input-group">
-                <label for="password">密碼</label>
-                <input type="password" id="password" placeholder="設置登入密碼">
-            </div>
-            
-            <div class="input-group">
-                <label for="userpassword">使用者碼</label>
-                <input type="password" id="password" placeholder="請輸入使用者碼">
-            </div>
-            <button type="submit" class="register-btn">註冊</button>
-        </form>
+<body id="register">
+
+    <!-- MUSE -->
+    <div class="container" id="muse">
+        <span class="letter">M</span>
+        <span class="letter">U</span>
+        <span class="letter">S</span>
+        <span class="letter">E</span>
     </div>
+
+    <div class="register-box" id="registerBox">
+        <h2>註冊帳號</h2>
+        <form id="registerForm">
+            <div class="input-group">
+                <p>帳號</p>
+                <input type="text" placeholder="請輸入帳號" id="username">
+            </div>
+            <div class="input-group">
+                <p>郵件</p>
+                <input type="email" placeholder="請輸入郵件" id="email">
+            </div>
+            <div class="input-group">
+                <p>密碼</p>
+                <input type="password" placeholder="請輸入密碼" id="password">
+            </div>
+
+            <div class="register-button">
+                <button type="submit" class="register-btn">註冊</button>
+            </div>
+        </form>
+
+        <div class="register-error">
+            <div></div>
+            <div></div>
+            <div>
+                <div class="message" id="registerMessage"></div>
+            </div>
+            <a href="login.html" class="forgot">返回首頁?</a>
+        </div>
+    </div>
+
+    <script>
+        function register() {
+            const username = document.getElementById('username');
+            const email = document.getElementById('email');
+            const password = document.getElementById('password');
+            const messageBox = document.getElementById('registerMessage');
+
+
+            username.classList.remove('error');
+            email.classList.remove('error');
+            password.classList.remove('error');
+            messageBox.textContent = '';
+
+
+            if (!username.value.trim()) {
+                username.classList.add('error');
+                messageBox.textContent = '請輸入帳號';
+                return false;
+            }
+
+            if (!email.value.trim()) {
+                email.classList.add('error');
+                messageBox.textContent = '請輸入郵件';
+                return false;
+            }
+
+            if (!password.value.trim()) {
+                password.classList.add('error');
+                messageBox.textContent = '請輸入密碼';
+                return false;
+            }
+
+            if (password.value.length < 6) {
+                password.classList.add('error');
+                messageBox.textContent = '密碼長度至少為6個字元';
+                return false;
+            }
+
+            return true;
+        }
+
+        document.getElementById('registerForm').addEventListener('submit', async function (event) {
+            event.preventDefault();
+
+            const messageBox = document.getElementById('registerMessage');
+
+            if (!register()) {
+                return;
+            }
+
+            const requestData = {
+                username: document.getElementById('username').value,
+                email: document.getElementById('email').value,
+                password: document.getElementById('password').value
+            };
+
+            try {
+                const response = await fetch('/api/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(requestData)
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    window.location.href = 'login.html';
+                } else {
+                    messageBox.textContent = data.message || '註冊失敗，請稍後再試';
+                }
+
+            } catch (error) {
+                messageBox.textContent = '無法連接到伺服器，請稍後再試';
+
+            }
+        });
+    </script>
+
 </body>
 
 </html>
