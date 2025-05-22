@@ -67,14 +67,14 @@
     .login-box h2 {
       text-align: center;
       margin-bottom: 20px;
-      font-size: 25px;
+      font-size: 30px;
       color: #ffffff;
     }
 
     .login-box .login-input {
       display: flex;
       gap: 15px;
-      font-size: 18px;
+      font-size: 20px;
       margin: 10px 0;
     }
 
@@ -86,7 +86,7 @@
       border-radius: 8px;
       background: rgba(255, 255, 255, 0.1);
       color: white;
-      font-size: 18px;
+      font-size: 20px;
     }
 
     .login-box .login-input input::placeholder {
@@ -108,7 +108,7 @@
       border-radius: 8px;
       color: #ffffff;
       font-weight: bold;
-      font-size: 16px;
+      font-size: 18px;
       cursor: pointer;
       transition: background-color 0.3s ease;
     }
@@ -127,7 +127,7 @@
     }
 
     .forgot {
-      font-size: 14px;
+      font-size: 16px;
       color: #aaa;
       margin-top: 8px;
       text-align: right;
@@ -140,7 +140,7 @@
     }
 
     .message {
-      font-size: 13px;
+      font-size: 16px;
       color: #ff8080;
       margin-top: 10px;
       text-align: center;
