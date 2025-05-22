@@ -1,34 +1,46 @@
- @media (max-width: 767px) {
+        @media (max-width: 767px) {
 
-     #loginBox,#registerBox {
-         width: 80vw;
-         padding: 15px;
-         margin-top: 70px;
-     }
+            #loginBox,
+            .login,
+            #registerBox {
+                width: 80vw;
+                padding: 15px;
+                margin-top: 70px;
+            }
 
 
-     .login-input input {
-         font-size: 14px;
-     }
+            .login-input input {
+                font-size: 14px;
+            }
 
-     .input-group input {
-         font-size: 14px;
+            .input-group input {
+                font-size: 14px;
 
-     }
+            }
 
-     .login-box .login-input {
-         gap: 5px;
-     }
+            .login-box .login-input {
+                gap: 5px;
+            }
 
-     .login-box .login-button button {
-         font-size: 14px;
-     }
+            .login-box .login-button button {
+                font-size: 14px;
+            }
 
-     .container {
-         transform: translate(-50%, -50%);
-     }
+            .container {
+                transform: translate(-50%, -50%);
+            }
 
-     #register .container {
-         transform: scale(0.6);
-     }
- }
+            #register .container,
+            #forgot-password .container {
+                transform: scale(0.6);
+            }
+
+            .register-box h2 {
+                margin: 0;
+            }
+
+            .register-error {
+                margin: 0 5px;
+            }
+            .register-box .input-group {gap:5px;}
+        }
