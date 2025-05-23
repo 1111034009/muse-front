@@ -1,65 +1,114 @@
- body {
-            background-color: #C2D2E8;
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
             height: 100vh;
+            background: linear-gradient(360deg, #005c8a, #003e5e, #00293d, #000000);
+            font-weight: bolder;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 0;
+            overflow: hidden;
+            position: relative;
         }
 
-        .login {
-            background: #36393F;
-            height: 350px;
-            width: 630px;
-            padding: 20px 40px;
-            border-radius: 12px;
-            text-align: center;
-        }
-
-        .login h2 {
-            color: white;
-            margin-bottom: 30px;
-            font-size: 28px;
-        }
-
-        .inputtext {
+        .container {
+            position: absolute;
             display: flex;
-            justify-content: center;
-            margin-bottom: 30px;
-        }
-
-        .inputtext input {
-            margin-bottom:15px;
-            font-size: 18px;
-            width: 550px;
-            height: 60px;
-            padding: 10px;
-            border-radius: 8px;
-            border: 1px solid #ffffff;
-            background-color: #22252C;
-            color: white;
-            text-align: center;
-            outline: none;
-        }
-
-        .inputtext input::placeholder {
-            color: white;
+            gap: 12px;
+            top: 20px;
+            left: 20px;
+            transform: scale(0.6);
             opacity: 0.9;
+            filter: blur(0.5px);
+            z-index: 10;
         }
 
-        .login-button {
-            width: 570px;
-            height: 68px;
-            border-radius: 8px;
-            border: none;
-            font-size: 20px;
+        .letter {
+            font-size: 80px;
+            color: #00BFFF;
+            opacity: 1;
+            text-shadow: 0 0 15px #00BFFF, 0 0 30px #00BFFF, 0 0 60px #00BFFF;
+        }
+
+        .userpassword {
+            width: 500px;
+            padding: 10px 40px;
+            background: rgba(0, 0, 20, 0.3);
+            backdrop-filter: blur(12px);
+            border-radius: 16px;
             color: white;
-            cursor: pointer;
-            font-weight: bold;
-            background-color: #4b53ff;
-            transition: background 0.3s ease;
+            opacity: 1;
+            transform: translateY(0);
+            z-index: 5;
+            background-color: #000022;
         }
 
-        .login-button:hover {
-            background-color: #3a42cc;
+        .userpassword h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 30px;
+            color: #ffffff;
+        }
+
+        .userpassword .inputtext {
+            display: flex;
+            gap: 15px;
+            font-size: 20px;
+            margin: 10px 0;
+        }
+
+        .userpassword .inputtext input {
+            width: 100%;
+            text-align: center;
+            padding: 12px;
+            margin: 5px 0;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 20px;
+        }
+
+        .userpassword .inputtext input::placeholder {
+            color: #aaa;
+        }
+
+        .userpassword .inputbtn {
+            margin: 10px 0px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .userpassword .user-button {
+            padding: 5px;
+            gap: 10px;
+        }
+
+        .userpassword .user-button {
+            width: 100%;
+            padding: 12px;
+            background-color: #5865F2;
+            border: none;
+            border-radius: 8px;
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .userpassword .user-button:hover {
+            background-color: #00BFFF;
+        }
+
+        .forgot {
+            font-size: 16px;
+            color: #aaa;
+            text-align: right;
+            cursor: pointer;
+            text-decoration: none;
         }
