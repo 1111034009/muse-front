@@ -1,7 +1,16 @@
 /* 手機 */
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   body {
     height: 100vh;
+  }
+
+  .main {
+    margin-left: 0;
+    padding: 0 0 0 60px
+  }
+
+  .left {
+    margin: 0;
   }
 
   .sidebar-toggle {
@@ -11,7 +20,7 @@
   .save-btn {
     position: static;
     width: 100%;
-    margin-top: 40px;
+    margin-top: 80px;
     padding: 12px;
     font-size: 16px;
     border-radius: 8px;
@@ -197,73 +206,84 @@
     font-size: 12px;
     text-align: center;
   }
-  
 
 
-    .song-list {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
 
-    .song-item {
-      width: 80%;
-      background-color: #f9f9f9;
-      border-radius: 10px;
-      padding: 12px;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .song-info {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      margin-bottom: 10px;
-      flex-direction: column;
-    }
-
-    .song-text {
-      width: 170px;
-    }
-
-    .song-info img {
-      width: 60px;
-      height: 60px;
-      border-radius: 6px;
-      object-fit: cover;
-    }
-
-
-    .add-button {
-      align-self: flex-end;
-      padding: 8px 14px;
-      font-size: 14px;
-      background-color: #e53935;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    .sidebar-toggle {
-      display: none;
-    }
-    
+  .song-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
   }
+
+  .song-item {
+    width: 80%;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .song-info {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 10px;
+    flex-direction: column;
+  }
+
+  .song-text {
+    width: 170px;
+  }
+
+  .song-info img {
+    width: 60px;
+    height: 60px;
+    border-radius: 6px;
+    object-fit: cover;
+  }
+
+
+  .add-button {
+    align-self: flex-end;
+    padding: 8px 14px;
+    font-size: 14px;
+    background-color: #e53935;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  .sidebar-toggle {
+    display: none;
+  }
+
+  .search-bar {
+    margin-top: 400px;
+    padding: 10px;
+  }
+
+  .search-bar input {
+    padding: 0;
+  }
+
+  .carousel-track {
+    margin-top: 60px;
+  }
+  #playlistContainer{padding: 0;}
+
+}
 
 
 /* 桌機版 */
 @media (min-width: 1024px) {
-  .main {
-    padding: 32px;
-  }
+
 
   .contents {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    gap: 40px;
   }
 
   .left {
@@ -290,6 +310,7 @@
   .right {
     height: 100%;
     width: 60%;
+    display: none;
     display: flex;
     flex-direction: column;
     gap: 30px;
@@ -300,6 +321,10 @@
     padding: 10px 20px;
     font-size: 18px;
     text-align: center;
+  }
+
+  .left {
+    padding: 0;
   }
 
   #sidebar-container {

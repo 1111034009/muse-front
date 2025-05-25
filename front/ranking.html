@@ -11,8 +11,10 @@
     <link rel="stylesheet" href="css/top.css" media="all" />
     <link rel="stylesheet" href="css/ranking.css" media="all" />
     <link rel="stylesheet" href="css/model_pop.css" media="all">
+    <link rel="stylesheet" href="../RWD_Front.css" media="all">
     <link rel="icon" href="./img/icon.png">
     <script src="js/front_side.js"></script>
+    
 </head>
 
 <body>
@@ -105,7 +107,7 @@
             { name: "讀書歌單" },
             { name: "睡前聽" }
         ];
-    
+
         function openPlaylistModal() {
             const form = document.getElementById("playlistForm");
             form.innerHTML = "";
@@ -116,11 +118,11 @@
             });
             document.getElementById("playlistModal").style.display = "flex";
         }
-    
+
         function closePlaylistModal() {
             document.getElementById("playlistModal").style.display = "none";
         }
-    
+
         function addToSelectedPlaylists() {
             const selected = [...document.querySelectorAll('input[name="playlist"]:checked')].map(cb => cb.value);
             if (selected.length === 0) {
@@ -130,16 +132,16 @@
             console.log("已加入以下歌單：", selected);
             closePlaylistModal();
         }
-    
+
         function goToMusic(songName) {
             const encodedSongName = encodeURIComponent(songName);
             window.location.href = `music.html?song=${encodedSongName}`;
         }
-    
+
         function searchMusic() {
             const search = document.getElementById("searchInput").value;
             const apiUrl = `http://localhost:8000/api/SearchMusic/getData?page=1&search=${encodeURIComponent(search)}`;
-    
+
             fetch(apiUrl)
                 .then(response => {
                     if (!response.ok) throw new Error("搜尋時發生錯誤");
@@ -147,6 +149,10 @@
                 })
                 .then(data => {
                     if (data.status === "success") {
+                        const titleElement = document.querySelector("h2.title");
+                        if (titleElement) {
+                            titleElement.textContent = "muse";
+                        }
                         displaySearchResults(data.data.records);
                     } else {
                         alert("搜尋結果為空");
@@ -157,16 +163,16 @@
                     alert("搜尋過程中發生錯誤，請稍後再試");
                 });
         }
-    
+
         function displaySearchResults(records) {
             const rankContainer = document.querySelector(".rank");
             if (!rankContainer) {
                 console.warn("找不到 .rank 元素");
                 return;
             }
-    
+
             rankContainer.innerHTML = ''; // 清空原本的排行內容
-    
+
             records.forEach(record => {
                 const songItem = document.createElement("div");
                 songItem.className = "song-item";
@@ -183,7 +189,7 @@
             });
         }
     </script>
-    
+
 
 </body>
 
