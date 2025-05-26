@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/index.css" media="all">
     <link rel="stylesheet" href="css/Manage_permissions.css" media="all">
     <link rel="stylesheet" href="css/model_pop.css" media="all">
-    <link rel="stylesheet" href="../RWD_Front.css"/>
+    <link rel="stylesheet" href="../RWD_Front.css" />
     <link rel="icon" href="/front/img/icon.png">
     <script src="js/front_side.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,23 +22,32 @@
         <button class="save-btn">新增</button>
         <div class="container" id="userList">
             <div class="user-item" data-role="一般" data-username="大大">
-                <span>大大(一般)</span>
+                <span class="user-label">大大(一般)</span>
                 <div class="user-controls">
-                    <button class="edit">編輯</button>
+                    <select class="edit">
+                        <option value="一般" selected>一般</option>
+                        <option value="青少年">青少年</option>
+                    </select>
                     <button class="del">刪除</button>
                 </div>
             </div>
             <div class="user-item" data-role="青少年" data-username="黃黃">
-                <span>黃黃(青少年)</span>
+                <span class="user-label">黃黃(青少年)</span>
                 <div class="user-controls">
-                    <button class="edit">編輯</button>
+                    <select class="edit">
+                        <option value="一般">一般</option>
+                        <option value="青少年" selected>青少年</option>
+                    </select>
                     <button class="del">刪除</button>
                 </div>
             </div>
             <div class="user-item" data-role="一般" data-username="石">
-                <span>石(一般)</span>
+                <span class="user-label">石(一般)</span>
                 <div class="user-controls">
-                    <button class="edit">編輯</button>
+                    <select class="edit">
+                        <option value="一般" selected>一般</option>
+                        <option value="青少年">青少年</option>
+                    </select>
                     <button class="del">刪除</button>
                 </div>
             </div>
@@ -53,7 +62,7 @@
             <label>帳號: <input type="text" id="new-username"></label>
             <label>密碼: <input type="password" id="new-password"></label>
             <label>權限
-                <select id="new-role">
+                <select id="edit">
                     <option value="一般">一般</option>
                     <option value="青少年">青少年</option>
                 </select>
@@ -65,33 +74,9 @@
         </div>
     </div>
 
-    <!-- 編輯彈窗 -->
-    <div class="modal" id="userModal">
-        <div class="modal-content">
-            <button class="close-button" onclick="closeModal('userModal')">&times;</button>
-            <h3>使用者設定</h3>
-            <label>帳號: <input type="text" id="edit-username" readonly></label>
-            <label>權限
-                <select id="edit-role">
-                    <option value="一般">一般</option>
-                    <option value="青少年">青少年</option>
-                </select>
-            </label>
-            <div class="modal-buttons">
-                <button onclick="confirmEdit()" class="modelbyes">確認</button>
-                <button onclick="closeModal('userModal')" class="modelbno">取消</button>
-            </div>
-        </div>
-    </div>
-
     <script>
-        function openModal(id, userName = "", userRole = "") {
-            const modal = document.getElementById(id);
-            if (id === "userModal") {
-                document.getElementById("edit-username").value = userName;
-                document.getElementById("edit-role").value = userRole;
-            }
-            modal.style.display = "flex";
+        function openModal(id) {
+            document.getElementById(id).style.display = "flex";
         }
 
         function closeModal(id) {
@@ -100,19 +85,25 @@
 
         document.querySelector('.save-btn').addEventListener('click', () => openModal('newuserModal'));
 
-        document.querySelectorAll('.edit').forEach(button => {
-            button.addEventListener('click', () => {
-                const userItem = button.closest('.user-item');
-                const userName = userItem.getAttribute('data-username');
-                const userRole = userItem.getAttribute('data-role');
-                openModal('userModal', userName, userRole);
-            });
-        });
+        function bindUserItemEvents(userItem, username) {
+            const delButton = userItem.querySelector(".del");
+            const select = userItem.querySelector(".role-select");
+            const label = userItem.querySelector(".user-label");
 
-        document.querySelectorAll('.del').forEach(button => {
-            button.addEventListener('click', (e) => {
+            delButton.addEventListener("click", (e) => {
                 e.target.closest('.user-item').remove();
             });
+
+            select.addEventListener("change", () => {
+                const newRole = select.value;
+                userItem.setAttribute("data-role", newRole);
+                label.textContent = `${username}(${newRole})`;
+            });
+        }
+
+        document.querySelectorAll(".user-item").forEach(userItem => {
+            const username = userItem.getAttribute("data-username");
+            bindUserItemEvents(userItem, username);
         });
 
         function confirmAdd() {
@@ -131,43 +122,23 @@
             newUserItem.setAttribute("data-role", role);
             newUserItem.setAttribute("data-username", username);
             newUserItem.innerHTML = `
-                <span>${username}(${role})</span>
+                <span class="user-label">${username}(${role})</span>
                 <div class="user-controls">
-                    <button class="edit">編輯</button>
+                    <select class="edit">
+                        <option value="一般" ${role === '一般' ? 'selected' : ''}>一般</option>
+                        <option value="青少年" ${role === '青少年' ? 'selected' : ''}>青少年</option>
+                    </select>
                     <button class="del">刪除</button>
                 </div>
             `;
 
-            newUserItem.querySelector(".edit").addEventListener("click", () => {
-                openModal('userModal', username, role);
-            });
-
-            newUserItem.querySelector(".del").addEventListener("click", (e) => {
-                e.target.closest('.user-item').remove();
-            });
-
+            bindUserItemEvents(newUserItem, username);
             userList.appendChild(newUserItem);
 
             document.getElementById("new-username").value = "";
             document.getElementById("new-password").value = "";
             document.getElementById("new-role").value = "一般";
             closeModal('newuserModal');
-        }
-
-        function confirmEdit() {
-            const username = document.getElementById("edit-username").value;
-            const role = document.getElementById("edit-role").value;
-
-            const userItems = document.querySelectorAll(".user-item");
-            userItems.forEach(item => {
-                const storedUsername = item.getAttribute("data-username");
-                if (storedUsername === username) {
-                    item.querySelector("span").textContent = `${username}(${role})`;
-                    item.setAttribute("data-role", role);
-                }
-            });
-
-            closeModal('userModal');
         }
     </script>
 </body>
