@@ -11,46 +11,54 @@
     <link rel="stylesheet" href="css/index.css" media="all">
     <link rel="stylesheet" href="css/top.css" media="all">
     <link rel="stylesheet" href="css/model_pop.css" media="all">
-    <link rel="stylesheet" href="../RWD_Front.css"/>
+    <link rel="stylesheet" href="../RWD_Front.css" />
     <link rel="icon" href="./img/icon.png">
     <script src="js/front_side.js"></script>
-<style>
-
-    @media (max-width: 768px) {
-
-  .search-bar {
-    width: 70%;
-    margin: 10px auto;
-  }
-  .search-bar button{
-    padding: 0;
-  }
-
-  .search-bar input {
-    width: 100%;
-    padding: 8px;
-    font-size: 16px;
-  }
-  .songs {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .songco {
-    font-size: 14px;
-  }
-
-  .songtags {
-    font-size: 12px;
-  }
-
-  .modal-content {
-    width: 90%;
-    margin: 20% auto;
-  }
-}
-
-</style>
+    <style>
+        @media (max-width: 768px) {
+            .search-bar {
+                width: 70%;
+                margin: 10px auto;
+            }
+            .search-bar button {
+                padding: 0;
+            }
+            .search-bar input {
+                width: 100%;
+                padding: 8px;
+                font-size: 16px;
+            }
+            .songs {
+                display: flex;
+                flex-direction: column;
+            }
+            .songco {
+                font-size: 16px;
+            }
+            .songtags {
+                font-size: 12px;
+                margin-top: 5px;
+                height: 40px;
+            }
+            .song {
+                padding: 30px;
+            }
+            .modal-content {
+                width: 90%;
+                margin: 20% auto;
+            }
+            main {
+                margin-top: 470px;
+            }
+        .li {
+            width: 100%;
+            height: 100%;
+        }
+        .hot, .persontt{
+            padding: 10px;
+        }
+    }
+    </style>
 </head>
 
 <body>
@@ -92,14 +100,14 @@
                         <h2>今日熱門</h2>
                         <ul>
                             <li>
-                                <a  onclick="playmusic(1)">
+                                <a onclick="playmusic(1)">
                                     <div class="songs">
                                         <div class="songco">
                                             ROCKSTAR<br>
                                             <span>LISA </span><br>
                                             <span>流行</span>
                                         </div>
-                                            <button class="songtags">加入歌單</button>
+                                        <button class="songtags">加入歌單</button>
                                     </div>
                                 </a>
                             </li>
@@ -189,51 +197,51 @@
     </div>
 
     <script>
-        
-        function playmusic(musicId){
+
+        function playmusic(musicId) {
             window.location.href = `music.html?musicId=${musicId}`;
         }
-       
-    </script>
-        <script>
 
-            // 搜尋音樂的函數
-            function searchMusic() {
-                const search = document.getElementById("searchInput").value;
-                const apiUrl = `http://localhost:8000/api/SearchMusic/getData?page=1&search=${search}`;
-    
-                // 發送 GET 請求到後端 API
-                fetch(apiUrl)
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('搜尋時發生錯誤');
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        // 當搜尋成功時，處理返回的資料
-                        if (data.status === "success") {
-                            displaySearchResults(data.data.records);  // 顯示搜尋結果
-                        } else {
-                            alert('搜尋結果為空');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('搜尋錯誤:', error);
-                        alert('搜尋過程中發生錯誤，請稍後再試');
-                    });
-            }
-    
-            // 顯示搜尋結果的函數
-            function displaySearchResults(records) {
-                const resultContainer = document.querySelector(".song .hot ul");  // 假設搜尋結果顯示區域在這裡
-    
-                // 清空現有的結果
-                resultContainer.innerHTML = '';
-                // 將每一條搜尋結果顯示到頁面上
-                records.forEach(record => {
-                    const listItem = document.createElement("li");
-                    listItem.innerHTML = `
+    </script>
+    <script>
+
+        // 搜尋音樂的函數
+        function searchMusic() {
+            const search = document.getElementById("searchInput").value;
+            const apiUrl = `http://localhost:8000/api/SearchMusic/getData?page=1&search=${search}`;
+
+            // 發送 GET 請求到後端 API
+            fetch(apiUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('搜尋時發生錯誤');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // 當搜尋成功時，處理返回的資料
+                    if (data.status === "success") {
+                        displaySearchResults(data.data.records);  // 顯示搜尋結果
+                    } else {
+                        alert('搜尋結果為空');
+                    }
+                })
+                .catch(error => {
+                    console.error('搜尋錯誤:', error);
+                    alert('搜尋過程中發生錯誤，請稍後再試');
+                });
+        }
+
+        // 顯示搜尋結果的函數
+        function displaySearchResults(records) {
+            const resultContainer = document.querySelector(".song .hot ul");  // 假設搜尋結果顯示區域在這裡
+
+            // 清空現有的結果
+            resultContainer.innerHTML = '';
+            // 將每一條搜尋結果顯示到頁面上
+            records.forEach(record => {
+                const listItem = document.createElement("li");
+                listItem.innerHTML = `
                 <a href="music.html">
                     <div class="songs">
                         <div class="songco">
@@ -244,11 +252,11 @@
                     </div>
                 </a>
             `;
-                    resultContainer.appendChild(listItem);  // 把新建立的 <li> 加到頁面中
-                });
-            }
-    
-        </script>
+                resultContainer.appendChild(listItem);  // 把新建立的 <li> 加到頁面中
+            });
+        }
+
+    </script>
 </body>
 
 </html>
