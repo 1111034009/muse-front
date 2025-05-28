@@ -6,7 +6,8 @@
 
   .main {
     margin-left: 0;
-    padding: 0 0 0 60px
+    padding: 0 0 0 60px;
+            margin-top: 20%;
   }
 
   .left {
@@ -272,6 +273,10 @@
     margin-top: 60px;
   }
   #playlistContainer{padding: 0;}
+  .edit,.del{
+    font-size: 14px;
+  }
+  .edit{padding: 0;}
 
 }
 
